@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gravity as Relational Attunement — Version 1</title>
+<style>
+  :root {
+    --bg: #faf8f3;
+    --ink: #2c2a26;
+    --ink-soft: #5c574e;
+    --accent: #8b6f47;
+    --accent-light: #d4c4a8;
+    --accent-deep: #6f5838;
+    --border: #e5dfd3;
+    --highlight: #fff8e1;
+    --formal: #5a7a5e;
+    --bridge: #6b8cae;
+    --correspondence: #a08580;
+    --warning: #b87060;
+    --new: #7a9b76;
+    --principle: #4a6a8e;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: Georgia, 'Iowan Old Style', 'Palatino', serif;
+    background: var(--bg);
+    color: var(--ink);
+    margin: 0;
+    padding: 0;
+    line-height: 1.75;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 70px 44px 120px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-bottom: 38px;
+    border-bottom: 2px solid var(--accent-light);
+  }
+
+  .header .breadcrumb {
+    font-size: 0.85em;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-size: 2em;
+    font-weight: normal;
+    margin: 0 0 14px;
+    color: var(--ink);
+    letter-spacing: 0.3px;
+    line-height: 1.25;
+  }
+
+  .header .version {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .header .subtitle {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 1.05em;
+    line-height: 1.5;
+  }
+
+  .header .author {
+    margin-top: 22px;
+    font-size: 0.9em;
+    color: var(--ink-soft);
+  }
+
+  .anchor-box {
+    background: var(--highlight);
+    border-left: 3px solid var(--accent);
+    padding: 24px 30px;
+    margin-bottom: 30px;
+    border-radius: 3px;
+    font-size: 0.95em;
+    line-height: 1.7;
+  }
+
+  .anchor-box h3 {
+    margin: 0 0 14px;
+    color: var(--accent-deep);
+    font-size: 1em;
+    letter-spacing: 0.3px;
+  }
+
+  .anchor-box strong {
+    color: var(--accent-deep);
+  }
+
+  .v2-note {
+    background: #f0f4f0;
+    border-left: 3px solid var(--new);
+    padding: 22px 28px;
+    margin-bottom: 40px;
+    border-radius: 3px;
+    font-size: 0.93em;
+    line-height: 1.7;
+  }
+
+  .v2-note h3 {
+    margin: 0 0 12px;
+    color: #4a6a4e;
+    font-size: 0.95em;
+    letter-spacing: 0.3px;
+  }
+
+  .v2-note strong {
+    color: #4a6a4e;
+  }
+
+  .toc {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 24px 32px;
+    margin-bottom: 50px;
+    border-radius: 4px;
+    font-size: 0.93em;
+  }
+
+  .toc h3 {
+    margin: 0 0 16px;
+    color: var(--accent-deep);
+    font-size: 1em;
+    letter-spacing: 0.3px;
+  }
+
+  .toc .part-heading {
+    font-weight: bold;
+    color: var(--accent-deep);
+    margin: 14px 0 6px;
+    font-size: 0.92em;
+  }
+
+  .toc .part-heading:first-child {
+    margin-top: 0;
+  }
+
+  .toc ol {
+    margin: 0 0 8px;
+    padding-left: 24px;
+    line-height: 1.85;
+  }
+
+  .toc ol li::marker {
+    color: var(--accent);
+  }
+
+  .toc .new-marker {
+    font-size: 0.75em;
+    color: var(--new);
+    font-weight: bold;
+    margin-left: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .part-divider {
+    text-align: center;
+    margin: 70px 0 40px;
+    position: relative;
+  }
+
+  .part-label {
+    display: inline-block;
+    background: var(--bg);
+    padding: 0 24px;
+    font-size: 0.78em;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+  }
+
+  .part-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--accent-light);
+    z-index: 1;
+  }
+
+  .part-title {
+    font-size: 1.55em;
+    color: var(--ink);
+    margin: 24px 0 10px;
+    font-weight: normal;
+  }
+
+  .part-intro {
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 30px;
+    line-height: 1.6;
+    font-size: 0.95em;
+  }
+
+  .section {
+    margin-bottom: 38px;
+    padding: 28px 34px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .section.formal { border-left: 3px solid var(--formal); }
+  .section.bridge { border-left: 3px solid var(--bridge); }
+  .section.correspondence { border-left: 3px solid var(--correspondence); }
+  .section.appendix { border-left: 3px solid var(--warning); background: #fdf9f5; }
+  .section.new-piece { border-left: 3px solid var(--new); }
+  .section.principle { border-left: 3px solid var(--principle); background: #f6f8fb; }
+
+  .section-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--ink);
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+
+  .new-badge {
+    display: inline-block;
+    font-size: 0.62em;
+    background: var(--new);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-left: 8px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .principle-badge {
+    display: inline-block;
+    font-size: 0.62em;
+    background: var(--principle);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-left: 8px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .stratum-tag {
+    font-size: 0.72em;
+    color: var(--ink-soft);
+    font-style: italic;
+    letter-spacing: 0.4px;
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  .stratum-tag.formal { color: var(--formal); }
+  .stratum-tag.bridge { color: var(--bridge); }
+  .stratum-tag.correspondence { color: var(--correspondence); }
+  .stratum-tag.appendix { color: var(--warning); font-weight: bold; }
+  .stratum-tag.new { color: var(--new); }
+  .stratum-tag.principle { color: var(--principle); font-weight: bold; }
+
+  .section-content p {
+    margin: 0 0 16px;
+  }
+
+  .section-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-content strong {
+    color: var(--accent-deep);
+  }
+
+  .section-content em {
+    color: var(--accent-deep);
+    font-style: italic;
+  }
+
+  .equation {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 14px;
+    margin: 18px 0;
+    background: var(--bg);
+    border-radius: 3px;
+    font-family: 'Cambria Math', Georgia, serif;
+  }
+
+  .definition {
+    background: var(--bg);
+    border-left: 3px solid var(--formal);
+    padding: 16px 22px;
+    margin: 18px 0;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .definition-label {
+    font-size: 0.75em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--formal);
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .stages-box {
+    background: var(--bg);
+    padding: 22px 28px;
+    margin: 22px 0;
+    border-radius: 3px;
+    border-left: 2px solid var(--accent-light);
+  }
+
+  .stage-item {
+    margin: 14px 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--border);
+  }
+
+  .stage-name {
+    font-weight: bold;
+    color: var(--accent-deep);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .warning-note {
+    background: #fff5f0;
+    border-left: 3px solid var(--warning);
+    padding: 16px 22px;
+    margin: 20px 0;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .warning-label {
+    display: block;
+    font-size: 0.76em;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #8b4530;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .open-issue {
+    background: #f8f5ed;
+    border-left: 3px solid var(--ink-soft);
+    padding: 14px 22px;
+    margin: 16px 0;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .open-label {
+    display: block;
+    font-size: 0.74em;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  .principle-box {
+    background: #eef2f7;
+    border-left: 3px solid var(--principle);
+    padding: 18px 24px;
+    margin: 22px 0;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .principle-label {
+    display: block;
+    font-size: 0.78em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--principle);
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .falsification {
+    background: #fff5f0;
+    border-left: 3px solid var(--warning);
+    padding: 14px 22px;
+    margin: 14px 0;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .falsification-label {
+    display: block;
+    font-size: 0.74em;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #8b4530;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  .closing {
+    background: #fffdf6;
+    border: 1px solid var(--accent-light);
+    padding: 26px 32px;
+    margin: 50px 0 0;
+    border-radius: 4px;
+    font-style: italic;
+    color: var(--accent-deep);
+    line-height: 1.7;
+  }
+
+  .closing strong {
+    font-style: normal;
+  }
+
+  .appendix-warning {
+    background: #fff5f0;
+    border: 2px solid var(--warning);
+    padding: 24px 30px;
+    margin-bottom: 30px;
+    border-radius: 4px;
+    font-size: 0.95em;
+    line-height: 1.7;
+  }
+
+  .appendix-warning h3 {
+    margin: 0 0 12px;
+    color: #8b4530;
+    font-size: 1em;
+    letter-spacing: 0.3px;
+  }
+
+  .appendix-warning strong {
+    color: #8b4530;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="breadcrumb">Relational Ontology · Standalone Essay</div>
+    <h1>Gravity as Relational Attunement<br>and Information Redistribution</h1>
+    <div class="version">Version 1 — Standalone English Edition</div>
+    <div class="subtitle">A conceptual and minimally formal account of gravity as relational synchronization</div>
+    <div class="author">
+      Le Matt Ansatz di Ego · Cartago, Costa Rica
+    </div>
+  </div>
+
+  <div class="anchor-box">
+    <h3>About this document</h3>
+    <p>This text develops a relational interpretation of gravity. It explores the hypothesis that what physics calls gravity may be understood, at an ontological level, as the macroscopic expression of a tendency toward relational return: a tendency for differentiated images to reduce local distinguishability while preserving the minimum identity that allows them to remain distinct.</p>
+    <p>The document does <strong>not</strong> offer a complete derivation of Newtonian gravity, nor does it replace general relativity. Its purpose is more precise: to articulate a coherent conceptual architecture, define the minimum formal vocabulary required by that architecture, and identify where quantitative work remains necessary.</p>
+    <p>The guiding formulation is this: <em>to gravitate is to reduce local distinguishability without violating total relational conservation.</em> The sections that follow unfold this idea across conceptual, formal, phenomenological, and epistemic levels.</p>
+  </div>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <div class="part-heading">Part I — Thesis and conceptual architecture</div>
+    <ol>
+      <li>Central thesis</li>
+      <li>Ontological starting point</li>
+      <li>From attraction to attunement</li>
+      <li>The three stages of attunement</li>
+      <li>The temporal asymmetry of attunement</li>
+      <li>Conservation of information as a brake on collapse</li>
+    </ol>
+    <div class="part-heading">Part II — Minimal formalization</div>
+    <ol start="7">
+      <li>Relational difference Δᵢⱼ</li>
+      <li>The five components of Δᵢⱼ</li>
+      <li>Acceleration as mode A</li>
+      <li>Gravitationally coherent family</li>
+      <li>Collective coherence as an operational criterion</li>
+    </ol>
+    <div class="part-heading">Part III — Readings of phenomena</div>
+    <ol start="12">
+      <li>The disk as dimensional deactivation</li>
+      <li>Systems with and without spin</li>
+      <li>Gravitational mass as structurally identical to inertial mass</li>
+      <li>The star as a collective image</li>
+      <li>The limiting regime</li>
+      <li>The place of light: bond, deflection, absence of gravitational charge</li>
+      <li>Light and energy: cosmological mediation</li>
+      <li>Gravitational waves as perturbations of the Δ field</li>
+    </ol>
+    <div class="part-heading">Part IV — Epistemic architecture</div>
+    <ol start="20">
+      <li>Correspondence principle with established physics</li>
+      <li>Relation to general relativity</li>
+      <li>Conditions of falsification</li>
+      <li>Open problems specific to this document</li>
+    </ol>
+    <div class="part-heading">Appendix</div>
+    <ol start="24">
+      <li>Attempt at a quantitative limit, with warning</li>
+    </ol>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label">Part I</span>
+  </div>
+  <h2 class="part-title">Thesis and conceptual architecture</h2>
+  <div class="part-intro">This is the level at which the document is strongest. It articulates an ontological reading of gravity without yet claiming a complete quantitative theory.</div>
+
+  <div class="section">
+    <h2 class="section-title">Central thesis</h2>
+    <span class="stratum-tag">Pure ontology · Conceptual core</span>
+    <div class="section-content">
+      <p>Gravity is not interpreted here as a force that attracts bodies. It is interpreted as a <strong>dynamics of attunement</strong> through which a system reduces local relational differences and redistributes them as velocity, spin, phase, radiation, or collective structure, until a common coherence is formed.</p>
+      <p>Gravity, read through this framework, does not eliminate information in an absolute sense. It reduces local distinguishability without violating total relational conservation. This compact formulation — <em>to gravitate is to reduce local distinguishability without violating total relational conservation</em> — captures the articulation developed throughout the document.</p>
+      <p>This reduction occurs in stages. First, dimensional information is redistributed, organizing trajectories into shared planes. Then differences of position, velocity, phase, and orientation are redistributed, aligning images toward shared nodes. Finally, when common coherence exceeds individual coherence, a collective image emerges whose identity is structurally stronger than the sum of its components.</p>
+      <p>To fall is not to be pushed. To fall is to lose local distinguishability. To gravitate is not to attract. To gravitate is to synchronize toward a common coherence without immediately erasing the minimum identity that allows something to remain something.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Ontological starting point</h2>
+    <span class="stratum-tag">Pure ontology · Basic framework</span>
+    <div class="section-content">
+      <p>In the relational framework, a particular image is not an isolated object placed inside a pre-existing space. It is a projection that sustains identity through relational information with other images. Each image carries five relationally active aspects: a relational scale R, a relative position with respect to other images, an internal rhythm sustained by its contained aspect m, an orientation or phase, and a minimum radius of identity.</p>
+      <p>As long as these five aspects sustain stable differences with respect to other images, the image remains distinguishable. If the differences decrease, images tend to form common structures. If the differences are fully annulled, the images cease to be distinguishable and return to the Origin.</p>
+      <p>Gravity, in this framework, is the macroscopic tendency of images to reduce relational information without immediately erasing their minimum radius of identity. Gravity operates in the range where images can approach, align, and synchronize, but not yet fuse. Beyond a certain threshold, what occurs is no longer gravity but a transition into another relational phase.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">From attraction to attunement</h2>
+    <span class="stratum-tag">Pure ontology · Shift of language</span>
+    <div class="section-content">
+      <p>The key word in this document is not attraction. It is <strong>attunement</strong>.</p>
+      <p>Attraction presupposes a force acting on pre-existing bodies within a background space. Attunement describes the mutual adjustment of relational rhythms that are already bound by belonging to the same Origin. Under the language of attraction, the question is: what exerts the force? Under the language of attunement, the question is: what structural tendency leads images to reduce their difference? The first question seeks an agent. The second seeks an inherent orientation.</p>
+      <p>The relational framework answers the second question directly: the tendency toward return is structural in every differentiated image. Gravity is that tendency operating macroscopically among images that already share co-belonging to the same Origin. No force is transmitted; attunement adjusts.</p>
+      <p>High relational difference produces observable detuning, which we perceive as separation. Low relational difference produces increasing attunement, which we perceive as closeness. What changes through gravity is not primarily the position of bodies; what changes is relational difference, and position is only the visible aspect of that change.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">The three stages of attunement</h2>
+    <span class="stratum-tag">Minimal structure · Architecture of gravitational attunement</span>
+    <div class="section-content">
+      <p>Gravitational attunement does not occur all at once. It proceeds through hierarchical structural stages. Each stage redistributes a different kind of relational information, and only when the previous stage has sufficiently stabilized can the next begin in full.</p>
+      <div class="stages-box">
+        <div class="stage-item">
+          <span class="stage-name">First stage — dimensional deactivation</span>
+          When a broad system begins to synchronize, the first thing it reduces is not all positional difference, but one effective dimension of freedom. Many trajectories that previously occupied a volume begin to organize around a common plane. The deactivated dimension does not disappear as a geometric possibility; it ceases to participate actively in the dominant description of the system. It appears as disk formation.
+        </div>
+        <div class="stage-item">
+          <span class="stage-name">Second stage — reduction of position, velocity, phase, and orientation</span>
+          Once the common plane has been established, images continue to reduce other relational differences. Trajectories approach one another not only spatially but rhythmically. Velocities, orbital phases, and orientations reorganize to reduce detuning. The system seeks a common space of resonance in which images can coherently re-enter relation.
+        </div>
+        <div class="stage-item">
+          <span class="stage-name">Third stage — predominance of common coherence</span>
+          When attunement reaches a sufficient threshold, the coherence of being a common structure begins to exceed the coherence of preserving each component’s individual information. The system ceases to behave merely as a set of related particles and begins to behave as a collective image with its own identity.
+        </div>
+      </div>
+      <p>This sequence does not replace the known equations of gravitation. It proposes a relational reading of why gravitational systems adopt recurring forms — disks before spheres in systems with spin, orbital alignments before random collisions, stars before distributed dust — and why those forms are not accidental but structurally consequential.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">The temporal asymmetry of attunement</h2>
+    <span class="stratum-tag">Pure ontology</span>
+    <div class="section-content">
+      <p>The fundamental equations of physics are often time-symmetric. Observed gravity, however, displays a clear temporal orientation: systems collapse, disks form, stars accrete — but we do not observe their spontaneous reverse processes. Standard physics attributes this asymmetry to initial conditions of the universe and to statistical considerations. The relational framework offers a more fundamental reading.</p>
+      <p>The tendency toward return is structural in the framework. It is not a statistical property that emerges from the behavior of many components; it is an ontological orientation of every differentiated image. Every image tends toward the Origin because its differentiation is a delay of return, not an equilibrium state. This means that <strong>the temporal arrow of gravity is ontological before it is statistical</strong>.</p>
+      <p>The reduction of Δᵢⱼ defines a privileged orientation in relational space. The reversible time described by standard physics appears only within already stabilized regimes, where the system oscillates locally around a minimum of Σ Δᵢⱼ. Outside those regimes, the arrow is set by the direction of decreasing Δ, not by statistical symmetry.</p>
+      <p>This reading contains an important nuance. Temporal asymmetry in the framework is not thermodynamic in the usual sense. It does not require postulating low-entropy initial conditions or invoking the second law. The asymmetry is structural: it emerges directly from the fact that the tendency toward return is built into the ontological condition of every image. This does not replace thermodynamics; it offers a complementary reading that operates at an ontological level before statistics can be formulated.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Conservation of information as a brake on collapse</h2>
+    <span class="stratum-tag">Pure ontology · Structural counterweight</span>
+    <div class="section-content">
+      <p>The previous section leaves an unresolved tension. If the tendency toward return is structural and incessant, why do stable gravitational systems not collapse on ontologically short timescales? Planetary orbits persist for billions of years; galaxies preserve their form across cosmic times. If every image tends toward the Origin without pause, such longevity seems inexplicable.</p>
+      <p>The answer proposed here is that the tendency toward return operates together with another structural property: <strong>the conservation of total relational information</strong>. The total identity projected from the Origin, within a closed system, is finite and cannot simply disappear. The relational information that sustains images may be redistributed, but it cannot be arbitrarily annulled.</p>
+      <p>It follows that reducing Δ in one component of a system requires increasing it in another, or redistributing it to larger scales. Local minima of Σ Δᵢⱼ are not mechanical equilibria but <strong>structural stalemates</strong>: configurations in which any further reduction of Δ in one direction would force a compensating increase in another, making the transition unfavorable under total informational conservation.</p>
+      <p>This reading has three important consequences.</p>
+      <p>First: orbital stability is explained structurally. A planetary orbit sustains low Δᵢⱼ in relative position but high Δᵢⱼ in relative velocity: orbital velocity is high. Reducing positional separation even further would require modifying velocity difference in a way the system cannot sustain under informational conservation. The orbit is stable not because of an equilibrium between centrifugal and gravitational forces — a reading that assumes forces as primary entities — but because total relational information does not allow a redistribution that reduces Δ further without compensation.</p>
+      <p>Second: the unlimited reach of gravity receives a natural explanation. If relational information does not dissipate but is redistributed, the effects of any local attunement propagate to larger scales. Gravity does not weaken with distance because a mediator is being diluted; rather, the redistribution of information across increasing scales produces effects that are increasingly diffuse but never strictly null.</p>
+      <p>Third: the temporal arrow is better articulated. The tendency toward return always operates, but its effective manifestation depends on whether informational conservation permits the required redistribution. In systems that have reached local minima, the tendency persists as latent tension and expresses itself only when an external perturbation breaks the informational balance. This explains why stable systems appear “timeless” until they are disturbed: the temporal arrow is present but suspended by informational blockage.</p>
+      <p>This section does not solve the technical problem of how to formulate total relational information conservation precisely. It articulates its structural role: it is the ontological counterweight to the tendency toward return. Without it, everything would rapidly collapse; without the tendency toward return, nothing would ever attune. Gravity, as a macroscopic phenomenon, is the result of both operating simultaneously.</p>
+      <div class="principle-box">
+        <span class="principle-label">Principle of minimum distinguishable difference</span>
+        The preceding sections converge on a principle that deserves explicit formulation: <em>every relational system tends to reduce the difference required to distinguish its internal images, provided that this reduction neither annuls minimum identity nor violates total relational conservation.</em> This principle gathers the central thesis, the three stages, conservation as a brake, and the notion of a stable minimum into one compact formulation.
+      </div>
+      <div class="open-issue">
+        <span class="open-label">Pending work</span>
+        Quantitatively formulating total relational information conservation and deriving from it the specific conditions of local minima requires formal development beyond this document. The present articulation serves as a conceptual bridge between previously separate problems within the architecture.
+      </div>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label">Part II</span>
+  </div>
+  <h2 class="part-title">Minimal formalization</h2>
+  <div class="part-intro">Operational definitions that prevent the thesis from remaining purely conceptual. These are not yet equations of motion; they are the minimum structure required for precise discussion.</div>
+
+  <div class="section formal">
+    <h2 class="section-title">Relational difference Δᵢⱼ</h2>
+    <span class="stratum-tag formal">Formalization · Central magnitude</span>
+    <div class="section-content">
+      <p>For the thesis of attunement to be discussed precisely, a magnitude is needed to measure how much relational information separates two images. This magnitude will be called relational difference and denoted Δᵢⱼ.</p>
+      <div class="definition">
+        <span class="definition-label">Relational difference</span>
+        Δᵢⱼ is the amount of information required to distinguish image i from image j within the relational space to which both belong.
+      </div>
+      <p>Three clarifications are important. First: Δᵢⱼ is not ordinary distance. Ordinary distance is a particular manifestation of Δᵢⱼ once the system is already expressed within an emergent geometric space. Second: Δᵢⱼ is not a property of individual images but of their relation. An isolated image has no Δ; it has Δ only in comparison with another. Third: Δᵢⱼ is always non-negative. Δᵢⱼ = 0 would mean that the images are indistinguishable — that they have collapsed into one.</p>
+    </div>
+  </div>
+
+  <div class="section formal">
+    <h2 class="section-title">The five components of Δᵢⱼ</h2>
+    <span class="stratum-tag formal">Formalization · Operational decomposition</span>
+    <div class="section-content">
+      <p>Relational difference decomposes into five aspects corresponding to the five aspects that every image sustains relationally.</p>
+      <p><strong>Phase difference.</strong> δφᵢⱼ is the minimum angular value between relational phases, normalized to the range [0, 1].</p>
+      <p><strong>Position difference.</strong> δxᵢⱼ = |xᵢ − xⱼ| / Lᵣ, with Lᵣ a relational reference scale of the system.</p>
+      <p><strong>Velocity difference.</strong> δvᵢⱼ = |vᵢ − vⱼ| / c, where c is the structural limiting relation against which all relative velocity is measured.</p>
+      <p><strong>Orientation difference.</strong> δθᵢⱼ = (1 − cos θᵢⱼ) / 2.</p>
+      <p><strong>Relational scale difference.</strong> δRᵢⱼ = |Rᵢ − Rⱼ|. In the regime of the projection criterion R² = 2⁻ⁿ, this is equivalent to δnᵢⱼ = |nᵢ − nⱼ|.</p>
+      <p>The composite form of Δᵢⱼ is quadratic:</p>
+      <div class="equation">Δᵢⱼ² = δφᵢⱼ² + δxᵢⱼ² + δvᵢⱼ² + δθᵢⱼ² + δRᵢⱼ²</div>
+      <p>The choice of uniform coefficients expresses the minimal decision that no component is privileged at this stage. The five components are irreducible to one another and compose orthogonally within the framework.</p>
+    </div>
+  </div>
+
+  <div class="section formal">
+    <h2 class="section-title">Acceleration as mode A</h2>
+    <span class="stratum-tag formal">Formalization · Link with generative hierarchy</span>
+    <div class="section-content">
+      <p>Acceleration is not introduced as an external concept. It appears within the generative hierarchy of the framework: U = ℵ̂ × R, V = U × R, m = U − V, A = V × R. The corresponding norms are |U| = R, |V| = R², |m| = R√(1−R²), |A| = R³.</p>
+      <p>Mode A represents the adjustment of visible projection when an image modifies its relation to scale R. In this framework, acceleration is not a force applied to a mass. It is the readjustment of the visible mode Vᵢ of an image i within the accumulated field of relational difference. When two images have high Δᵢⱼ, the mode A of each tends to reduce that Δᵢⱼ.</p>
+      <p><strong>Potential A and effective A.</strong> A as potential is the structural capacity of image i to readjust its visible mode: it is internal to i, fixed by its place in the generative hierarchy, with norm R³. A as effective is the concrete orientation and magnitude that this readjustment takes in response to the field of Δ. Observable acceleration is effective A; the underlying capacity is potential A.</p>
+      <p>Three consequences follow immediately. First: gravitational acceleration has the same structural scale R³ as any other acceleration. Second: to fall is to operate mode A in the direction of decreasing Δ. Third: to orbit is to sustain Δᵢⱼ as stable; an orbit is not an equilibrium between forces, but a regime in which A does not need to increase or decrease Δᵢⱼ, only maintain it.</p>
+    </div>
+  </div>
+
+  <div class="section formal">
+    <h2 class="section-title">Gravitationally coherent family</h2>
+    <span class="stratum-tag formal">Formalization · Condition of systemic closure</span>
+    <div class="section-content">
+      <p>A set of images forms a gravitationally coherent family when the sum of their relational differences tends toward a stable minimum.</p>
+      <div class="equation">Σᵢⱼ Δᵢⱼ → stable minimum</div>
+      <p>The minimum is not zero, because the images would then be indistinguishable. It is local rather than global, and dynamic rather than static: images continue to operate A in order to maintain Δᵢⱼ around the minimum value. Planetary orbits are the visible manifestation of this dynamic maintenance.</p>
+      <p>The transition among the three stages of attunement corresponds to successive reductions of the stable minimum. In the first stage, the system reduces Σ Δᵢⱼ by deactivating a dimensional component. In the second, it reduces the remaining components within the plane. In the third, the minimum falls sufficiently for the family to operate effectively as a single image.</p>
+    </div>
+  </div>
+
+  <div class="section formal">
+    <h2 class="section-title">Collective coherence as an operational criterion</h2>
+    <span class="stratum-tag formal">Formalization · Quantitative criterion</span>
+    <div class="section-content">
+      <p>The individual coherence of an image i is inversely proportional to how much relational difference it sustains with the rest: C_individual(i) ∝ 1 / Σⱼ≠ᵢ Δᵢⱼ. The common coherence of the family is inversely proportional to the mean relational difference: C_common ∝ 1 / ⟨Δᵢⱼ⟩.</p>
+      <p>The emergence of a collective image occurs when the variance of Δᵢⱼ within the family is small compared with the square of the mean:</p>
+      <div class="equation">Var(Δᵢⱼ) ≪ ⟨Δᵢⱼ⟩²  → collective image</div>
+      <p>This criterion is internal to the framework and operational: in principle, it can be estimated for a given family. It does not fully resolve how the dynamics of the system transforms once the threshold is crossed, but it is an advance beyond purely qualitative description.</p>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label">Part III</span>
+  </div>
+  <h2 class="part-title">Readings of phenomena</h2>
+  <div class="part-intro">How the framework reads specific gravitational phenomena. These are not quantitative derivations; they are qualitative readings that show how the framework gives coherent sense to known observations.</div>
+
+  <div class="section bridge">
+    <h2 class="section-title">The disk as dimensional deactivation</h2>
+    <span class="stratum-tag bridge">Reading of phenomenon · First stage</span>
+    <div class="section-content">
+      <p>The disk is not an accidental structure. It is the natural geometry of the first stage of gravitational attunement when spin is present. Before the disk, the system contains many trajectories with multiple inclinations. During disk formation, one spatial dimension becomes less relevant. Trajectories progressively share a plane. The system conserves spin as relational memory of the difference that has not yet been eliminated: angular momentum testifies that attunement preserved information in one direction while reducing information in others.</p>
+    </div>
+  </div>
+
+  <div class="section bridge">
+    <h2 class="section-title">Systems with and without spin</h2>
+    <span class="stratum-tag bridge">Reading of phenomenon · Qualitative distinction</span>
+    <div class="section-content">
+      <p>When a system has net spin, that direction acts as a constraint during attunement: information can be reduced in the directions perpendicular to spin, but not in the direction of spin itself. This yields a specific qualitative prediction.</p>
+      <p><strong>With net spin.</strong> The system must form a disk before it can concentrate. Spiral galaxies, protoplanetary systems, and accretion disks are consequences of possessing spin during gravitational attunement.</p>
+      <p><strong>Without net spin.</strong> The system may collapse spherically without passing through a disk stage. Globular clusters, elliptical galaxies, and relaxed stellar systems exhibit approximate spherical symmetry precisely because they did not carry enough spin to force an intermediate stage.</p>
+      <p>The prediction is not new in astrophysics. What the framework adds is an ontological reading: the form of a gravitational system is not an accident of initial conditions alone, but a structural consequence of which relational information can and cannot be reduced during attunement.</p>
+    </div>
+  </div>
+
+  <div class="section bridge">
+    <h2 class="section-title">Gravitational mass as structurally identical to inertial mass</h2>
+    <span class="stratum-tag bridge">Reading of phenomenon · Strong conceptual piece</span>
+    <div class="section-content">
+      <p>The equivalence between inertial mass and gravitational mass is one of the most solid facts in experimental physics. General relativity elevates it to a fundamental principle but does not derive it. The relational framework permits a deeper reading.</p>
+      <p>In the framework, mass is a fraction of the contained aspect m of an image. <strong>Inertial context.</strong> When an external influence attempts to modify the visible mode V of an image, resistance to change depends on how strongly the image is anchored in its own internal identity. An image with large m strongly resists changes in V. Inertia is, structurally, m operating as resistance to adjustment.</p>
+      <p><strong>Gravitational context.</strong> When two images participate in gravitational attunement, the amount of relational difference Δ each contributes depends on how much internal identity it sustains. An image with large m sustains much relational information with respect to others and therefore presents a large Δ to be reduced. Gravitational offering is, structurally, m operating as the support of relational difference.</p>
+      <p>The identity between inertial mass and gravitational mass is neither coincidence nor postulate. <strong>It is structural identity: the same magnitude m operating in two different contexts.</strong> In one context, m measures resistance to changes in the image’s own visible mode V. In the other, m measures the offering of difference with other images. But it is the same m.</p>
+      <p>Any framework that separated inertia and gravity into distinct properties would have to explain why they coincide experimentally. The relational framework identifies them from the beginning: they are the same thing under different relational functions. This is likely the strongest conceptual unification offered by the document.</p>
+    </div>
+  </div>
+
+  <div class="section bridge">
+    <h2 class="section-title">The star as a collective image</h2>
+    <span class="stratum-tag bridge">Reading of phenomenon · Partial third stage</span>
+    <div class="section-content">
+      <p>A star is a collective image in which common coherence partially exceeds the relational independence of its components. The internal pressure described by standard physics as thermonuclear equilibrium can be read, within the framework, as an expression of the relational resistance of the components to losing their individual identity completely.</p>
+      <p>The star exists as an equilibrium between two coherences in tension: the collective coherence that tends to unify the system, and the individual persistence that keeps the components distinguishable. Applying the criterion above, a star is a system in which Var(Δᵢⱼ) has decreased sufficiently relative to ⟨Δᵢⱼ⟩² for collective dynamics to dominate.</p>
+      <p>What distinguishes a star from a planet is not size in itself, but relational regime. A planet is a coherent family in which individual images maintain strong identity within a moderate common coherence. A star is a family in which common coherence has crossed the threshold at which the dominant dynamics is collective rather than individual.</p>
+    </div>
+  </div>
+
+  <div class="section bridge">
+    <h2 class="section-title">The limiting regime</h2>
+    <span class="stratum-tag bridge">Reading of phenomenon · Extreme third stage</span>
+    <div class="section-content">
+      <p>If attunement continues beyond a certain threshold, the individual identity of images ceases to be the dominant description. A black hole, in this reading, is an extreme regime in which external relational information has been reduced to the minimum accessible level. What persists as observable is only what cannot be reduced without destroying the collective image itself: mass, spin, charge, and horizon.</p>
+      <p>The event horizon can be read as the relational boundary beyond which no external image can sustain Δ with the internal images. What is called the singularity can be read as the regime in which Σ Δᵢⱼ has tended toward the minimum structural value compatible with the continued existence of a collective image.</p>
+      <p>The limiting regime is not necessarily final. The tendency toward return also operates there, but informational conservation brakes it. The stability of black holes, if sustained, would indicate that the limiting regime has found a structural stalemate that is not dissolution but extreme collective persistence.</p>
+    </div>
+  </div>
+
+  <div class="section bridge">
+    <h2 class="section-title">The place of light: bond, deflection, absence of gravitational charge</h2>
+    <span class="stratum-tag bridge">Reading of phenomenon · Clear qualitative prediction</span>
+    <div class="section-content">
+      <p>If light is the informational bond between images, and gravity is the attunement that reduces relational information between images, what is the relation between the two?</p>
+      <p><strong>Light as vehicle of gravitational information.</strong> Light is the vehicle through which relational information travels between images. When two images are linked by light, they share information about their respective differences. This explains why gravity appears to propagate at the speed of light: the vehicle of relational information is light itself.</p>
+      <p><strong>Light does not generate gravity but responds to it.</strong> Light, by ontological definition, is an image without m. The gravitational offering of an image is structurally m. Therefore, <strong>light does not contribute gravitational offering</strong>. But it does respond to the field of Δ established by images with m.</p>
+      <p><strong>Light changes direction without changing speed.</strong> Images with m respond to gravity through mode A, which reorients and modifies V. In light, V is always c. Light cannot accelerate or decelerate; the only thing that can change is the direction of V. Therefore, when light crosses a gravitational field, its trajectory curves but its speed does not change.</p>
+      <p>This qualitative prediction agrees with observation: gravitational deflection of light is well known, and it is a change of direction rather than a change of speed. The relational framework explains it structurally: because light lacks m, it neither generates gravity nor accelerates under it; it only changes direction, because that is the only change its structure permits.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Light and energy: cosmological mediation</h2>
+    <span class="stratum-tag bridge">Reading of phenomenon · Tension with standard physics</span>
+    <div class="section-content">
+      <p>The preceding section states that light does not generate gravity because it lacks m. General relativity, however, holds that energy, including electromagnetic energy, contributes to spacetime curvature. The early universe, dominated by radiation, expanded according to laws that depend on that energy density. This section addresses the apparent tension between the two statements.</p>
+      <p>The claim that light does not generate gravity should be read strictly: light does not contribute direct offering of Δ because it has no m. But light constantly interacts with images that do have m: it is absorbed, scattered, and transformative. Those interactions affect the field of Δ sustained by images with m.</p>
+      <p>From this follows a specific reading of the cosmological contribution of radiation. <strong>Radiative energy density modifies gravitational dynamics, but as mediation rather than direct source.</strong> A region with high light density interacts intensely with the matter present there; those interactions modify how matter sustains its m, how it moves, and how it is distributed. The net effect on gravitational dynamics is macroscopically indistinguishable from treating radiation as a source. Ontologically, however, the source remains m.</p>
+      <p>This reading is compatible with cosmological observations without requiring light to possess gravitational offering of its own. In the early universe, radiation dominated and intensely mediated with the matter present; its effect on expansion is real, but the framework reads it as a manifestation of how radiation affects the dynamics of images with m, not as an independent source.</p>
+      <p>This is a mediating solution, not a complete resolution. A deeper account would require deriving E = mc² within the framework — explaining why energy and mass are so structurally interchangeable in relativistic regimes. The framework provides indications: m is a fraction of confinement, and energy is active relational information. But the formal derivation remains pending.</p>
+      <div class="open-issue">
+        <span class="open-label">Pending work</span>
+        It remains necessary to articulate precisely how light–matter mediation produces the cosmological effects attributed to radiative energy density. The reading offered here is coherent within the framework and compatible with observation, but it is not a complete derivation of cosmological dynamics from relational principles.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Gravitational waves as perturbations of the Δ field</h2>
+    <span class="stratum-tag bridge">Reading of phenomenon · Propagation of relational disturbance</span>
+    <div class="section-content">
+      <p>The detection of gravitational waves in 2015 and subsequent events shows that gravitational perturbations travel at the speed of light and carry energy. The framework can read them coherently within its general architecture.</p>
+      <p>In this framework, gravitational waves are <strong>perturbations in the field of Δ that propagate through the luminous bond</strong>. When a family of images with m undergoes rapid reorganization — for example, two black holes merging — the field of Δ that they sustain with the rest of the universe changes abruptly. That perturbation propagates because the luminous bond connecting images transmits the change.</p>
+      <p>The propagation speed coincides with c because c is the structural limiting relation of all relational information transmission. Gravitational waves could not travel faster than the bond that propagates them.</p>
+      <p>This reading is coherent with available observations: gravitational waves travel at c, carry information about their source, and momentarily modify distances between detectors. The last point has a natural explanation in the framework: if waves are perturbations of the Δ field, their passage momentarily modifies the relational difference between the images compared by the detector, which appears as a change in effective distance.</p>
+      <p>The framework does not yet produce quantitative predictions for gravitational waves that differ from general relativity. What it offers is an ontological reading: gravitational waves are not fluctuations of spacetime as substance, but perturbations in the field of relational information that sustains linked images.</p>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label">Part IV</span>
+  </div>
+  <h2 class="part-title">Epistemic architecture</h2>
+  <div class="part-intro">The conditions under which this document should be evaluated, the methodological principles of the framework, and the problems it explicitly leaves open.</div>
+
+  <div class="section principle">
+    <h2 class="section-title">Correspondence principle with established physics</h2>
+    <span class="stratum-tag principle">Epistemic architecture · Methodological principle</span>
+    <div class="section-content">
+      <p>The framework must maintain a careful relation to established physics. At times it can use established results as observational constraints. At other times it must avoid importing the mathematical structure of existing theories too quickly. This section makes explicit the methodological principle that regulates that relation.</p>
+      <div class="principle-box">
+        <span class="principle-label">Relational correspondence principle</span>
+        The relational framework aims to recover the observational results of established physics as limiting cases, but it does not need to reproduce their internal mathematical structure. Recovering observational results is necessary for consistency with measurable reality. Reproducing internal mathematical structure would be rewriting, not contribution.
+      </div>
+      <p>This principle has three practical consequences.</p>
+      <p><strong>Why the Newtonian appendix is problematic.</strong> The appendix attempts to recover the 1/r² law by invoking a Poisson-type equation and postulating flux conservation. This imports mathematical structure rather than deriving an observational result from relational principles. For this reason it is explicitly marked with a warning: not because the result is wrong, but because the route toward it passes through classical structure instead of being derived from the framework itself.</p>
+      <p><strong>Why the prediction of deflection without acceleration is legitimate.</strong> The framework predicts qualitatively that light changes direction without changing speed under gravity. This agrees with observation. The prediction does not import the Schwarzschild metric or the mathematical structure of general relativity; it states a structural consequence of light lacking m. The agreement with established physics is legitimate validation, not mere rewriting.</p>
+      <p><strong>How to evaluate future developments.</strong> Any future development must pass this filter: is it importing mathematical structure from established physics, or is it deriving an observationally coherent result from its own principles? The first move weakens the distinctive value of the framework; the second strengthens it.</p>
+      <p>This principle is methodological, not metaphysical. It does not assert that the framework is superior to established physics, nor that established physics is limited. It only provides a criterion for distinguishing when an incorporation adds value and when it merely redescribes the known in different language.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Relation to general relativity</h2>
+    <span class="stratum-tag">Epistemic architecture · Relation to existing theory</span>
+    <div class="section-content">
+      <p>A question must be faced openly: is effective mode A, operating on V in response to the field of Δ generated by images with m, structurally different from geodesic motion in a curved metric determined by the distribution of energy and momentum?</p>
+      <p>There are reasons to suspect that, in the appropriate macroscopic limit, the two descriptions may be equivalent. If the field of Δ determines how the visible mode V of each image reorganizes, and spacetime geometry determines how bodies move along geodesics, the two may be capturing the same underlying structure in different languages.</p>
+      <p>This possibility must be named and evaluated honestly. There are two possible readings, each with different consequences for the value of the framework.</p>
+      <p><strong>First reading — structural equivalence in the limit.</strong> If the relational framework reproduces exactly the predictions of general relativity in the regimes where general relativity applies, then the framework does not compete with general relativity; it offers an ontological reading of it. This would be a success under the correspondence principle: the framework recovers observational results without importing mathematical structure. But it would also mean that the framework does not produce distinctive predictions in the domain already covered by general relativity. Its value would be philosophical — understanding what spacetime curvature means relationally — rather than physical in the predictive sense.</p>
+      <p><strong>Second reading — deviations in specific regimes.</strong> If the framework predicts deviations from general relativity in regimes where Δ cannot be described by a simple geometry — for example, at scales where the discrete structure of R² = 2⁻ⁿ becomes relevant, or in systems where relational information conservation imposes constraints not captured by general relativity — then the framework would have distinctive physical content. Those deviations would be the falsifiable predictions of the program.</p>
+      <p>This document does not resolve which reading is correct. Keeping both possibilities open is the appropriate honesty at this stage. What matters is that the framework not confuse itself with a mere rewriting of general relativity. If it is such a rewriting, it should acknowledge that. If it is not, it should identify where it differs.</p>
+      <p>The critical question is therefore: <strong>in which specific regimes does the framework predict quantitative deviations from general relativity?</strong> Without an answer, its value as an independent physical theory remains suspended. With an answer, the framework either gains or loses real empirical standing.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Conditions of falsification</h2>
+    <span class="stratum-tag">Epistemic architecture</span>
+    <div class="section-content">
+      <p>This document can fail under the following specific conditions.</p>
+      <div class="falsification">
+        <span class="falsification-label">Impossibility of defining Δᵢⱼ operationally</span>
+        If relational difference cannot be defined in such a way that the five proposed components are independent, measurable, or at least estimable, the central magnitude remains an empty concept.
+      </div>
+      <div class="falsification">
+        <span class="falsification-label">Inconsistency with the three observed stages</span>
+        If gravitational systems with spin can collapse directly without passing through a disk stage, the tripartite architecture loses support.
+      </div>
+      <div class="falsification">
+        <span class="falsification-label">Independence between the speed of gravity and the speed of light</span>
+        If higher-precision experiments show that the propagation speed of gravitational effects differs significantly from c, the account of light as the vehicle of relational information is invalidated.
+      </div>
+      <div class="falsification">
+        <span class="falsification-label">Detection of direct gravitational offering by light</span>
+        If experiments were to detect that systems dominated by electromagnetic radiation generate a gravitational field in their own right — not as mediation with matter, but as direct coupling — the account of light offered here would be refuted.
+      </div>
+      <div class="falsification">
+        <span class="falsification-label">Exact equivalence with general relativity without deviations</span>
+        If the framework turns out to be exactly equivalent to general relativity in every regime, with no distinctive prediction, it loses status as an independent physical theory and remains a philosophical reformulation.
+      </div>
+      <div class="falsification">
+        <span class="falsification-label">Trivial reparametrization</span>
+        If the entire gravitational formulation can be shown to be equivalent to a rewriting of known physics without new predictive content, it must be treated as a potentially useful philosophical reformulation, but not as a distinctive scientific theory.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Open problems specific to this document</h2>
+    <span class="stratum-tag">Epistemic architecture</span>
+    <div class="section-content">
+      <p>This gravitational development leaves the following issues unresolved.</p>
+      <p><strong>First — coefficients of the components of Δ.</strong> The quadratic formulation assumes uniform coefficients. An alternative proposal would assign coefficients proportional to the norms of the corresponding generative modes. A clean one-to-one correspondence does not yet follow from the framework; it remains a conjecture to examine.</p>
+      <p><strong>Second — composition of mode A in the presence of many images.</strong> Three routes are available: pairwise vector superposition, gradient of an aggregate scalar potential, or response to the global field of Δ. The third route is conceptually more coherent but brings the framework closer to the structure of general relativity; it therefore requires caution.</p>
+      <p><strong>Third — quantitative criterion for stage transition.</strong> The three stages are qualitatively distinct, but there is no value of Σ Δᵢⱼ that marks the transition. A suggestive proposal connects this to self-organized criticality — transitions would be critical and display observable signatures — but the connection remains analogical rather than derived.</p>
+      <p><strong>Fourth — complete formalization of collective coherence.</strong> The criterion Var(Δ) ≪ ⟨Δ⟩² is operational but does not resolve how the dynamics of a system transforms once the threshold is crossed.</p>
+      <p><strong>Fifth — honest recovery of the Newtonian limit.</strong> A coherent recovery requires deriving the metric structure of emergent relational space rather than importing flux conservation from classical field theory. Invoking total relational information conservation may provide a more coherent direction, but that too remains undeveloped.</p>
+      <p><strong>Sixth — inertial mass equals gravitational mass.</strong> The document provides the qualitative articulation that both are the same m operating in different contexts. Its quantitative translation remains pending.</p>
+      <p><strong>Seventh — derivation of E = mc² within the framework.</strong> The section on light and energy articulates cosmological mediation, but a deeper reading requires formally deriving relativistic mass–energy equivalence. The framework offers hints; the derivation remains open.</p>
+      <p><strong>Eighth — coarse-graining and the passage from Δᵢⱼ to collective dynamics.</strong> Δᵢⱼ is defined between individual images, but the document’s phenomenological readings concern macroscopic structures such as disks and stars. A procedure of aggregation is needed, analogous to the passage from molecules to gases in statistical mechanics.</p>
+      <p><strong>Ninth — cosmology and expansion.</strong> The universe at large scales displays accelerated expansion, not collapse. If the tendency toward return is structural, the framework must eventually read cosmic expansion as a phenomenon of differentiation at global scale. That reading is speculative and requires separate development.</p>
+      <p><strong>Tenth — quantitative deviations from general relativity.</strong> The critical open question is to identify regimes in which the framework predicts quantitative deviations from general relativity. Without such regimes, the framework’s value as an independent physical theory remains suspended.</p>
+      <p><strong>Eleventh — relational granularity and the Planck scale.</strong> The projection criterion R² = 2⁻ⁿ implies that relational levels are discrete. If Δᵢⱼ includes a component δR of discrete relational scale difference, then Δᵢⱼ itself has granular structure in the most fundamental regime. This is analogous to spacetime granularity near the Planck scale. The question remains: to what spatial scale does the level n of typical images in the present regime correspond, and how does it compare with the Planck scale? If there is coincidence, it would be a remarkable correspondence. If not, the framework would make a distinctive claim about the scale at which the continuum ceases to apply.</p>
+      <p><em>Note on ℏ within the projection hierarchy.</em> A reading internal to this open problem suggests that Planck's constant ℏ may be located structurally within the same hierarchy R² = 2⁻ⁿ that governs relational granularity. Under this reading, n = 0 corresponds to the Origin: no scale reduction, no projected image, no relational information. n = 1 corresponds to the first projected difference: the spectrum of frequencies exists as available distinction, but not yet as relation actualized between images. The photon, lacking m, is the natural inhabitant of this level. n = 2 corresponds to the first actualized relation: a particular solution of the Pythagorean partition ω²ℵ = ω²V + ω²m is realized, and the previously available difference becomes operationally measurable. ℏ, in this reading, is the first difference projected at n = 1 — present in the spectrum as condition of any further projection — that becomes measurable only when a particular solution of the partition is realized at n = 2. Before that realization, ℏ is the structural quantum of distinguishability available to the framework. After it, ℏ is the unit by which relation between images becomes physical. This articulation does not import ℏ from outside the framework: it locates ℏ within the discrete hierarchy already postulated by R² = 2⁻ⁿ, and clarifies why ℏ appears first in the photon — because the photon is the minimal image at n = 1, the only image that sustains projection without requiring an m component. Every image with m inhabits levels n ≥ 2, where ℏ is already operating rather than appearing. The articulation is conceptual, not yet quantitative: it does not derive the numerical value of ℏ, nor does it specify the precise relation between the discrete hierarchy and the continuous Pythagorean partition. Both remain open. What it offers is a structural location for ℏ that does not require postulating it alongside the framework.</p>
+      <p><strong>Twelfth — electric charge in the relational framework.</strong> The document articulates mass as m operating as gravitational offering of Δ, and spin as relational memory. Electric charge has no settled reading here. One possibility is that charge may be linked to another aspect of the image — perhaps phase or orientation — operating as the offering of another kind of relational difference. The electric force would then be another mode of attunement, analogous to but not identical with gravity. A future relational reading of gravity and electromagnetism as two modes of attunement based on different aspects of the image would be a major achievement. This remains a distant direction rather than an immediate agenda.</p>
+      <p><strong>Thirteenth — ontological temporal arrow versus cosmic expansion.</strong> If each image tends toward return, the totality of images should seem to tend toward return as well. Accelerated cosmic expansion appears to contradict this directly. A possible way out is that cosmic expansion is not gravitational in the sense described here, but a higher-scale phenomenon: emergent relational space itself undergoing differentiation rather than return. The tendency toward return would operate locally as gravity, while differentiation dominates globally as expansion. This reading preserves the ontological arrow without contradicting cosmological observation, but it requires an account of how differentiation and return operate simultaneously at different scales.</p>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label">Appendix</span>
+  </div>
+  <h2 class="part-title">Attempt at a quantitative limit</h2>
+
+  <div class="appendix-warning">
+    <h3>Warning about this appendix</h3>
+    <p>The main body of this document operates at the conceptual and minimally formal levels. This appendix ventures into an attempted quantitative formulation that connects the framework with the Newtonian limit of gravity.</p>
+    <p><strong>The attempt carries an identified methodological risk: it borrows a known classical mathematical structure and adjusts it with coefficients from the framework in order to reproduce an expected result.</strong> Under the correspondence principle stated above, this move is explicitly problematic: it imports mathematical structure, such as Poisson-type equations and flux conservation, instead of deriving observational results from relational principles.</p>
+    <p>The appendix is included for two reasons: because it honestly records how far the quantitative attempt presently reaches, and because a critical reader may use it precisely as an example of the risk. Its inclusion is transparent, not strategic.</p>
+  </div>
+
+  <div class="section appendix">
+    <h2 class="section-title">Construction of the Newtonian limit: attempt and warning</h2>
+    <span class="stratum-tag appendix">Appendix · Identified methodological risk</span>
+    <div class="section-content">
+      <p>The standard argument for recovering the 1/r² law is the following. If accumulated relational difference is distributed isotropically in three dimensions, the intensity of its reduction spreads across spherical surfaces of area 4πr². By conservation of relational flux, local intensity decreases as 1/r².</p>
+      <p>The argument is mathematically correct if two premises are granted: local Euclidean structure of emergent relational space, and the existence of a flux conservation analogous to that of the electric field. Neither premise is derived from the framework; both are imported from classical physics.</p>
+      <p>If the premises were granted, one could define a potential ΦΔ such that A is oriented as Aᵢ ∝ −∇ΦΔ, and formulate ∇²ΦΔ = 4πα ρᴵ. Correspondence with Newtonian gravity would then be obtained with ρᴵ = κ ωₘ² ρ_obs, yielding G_eff = α κ ωₘ² as an expression of Newton’s constant within the framework.</p>
+      <div class="warning-note">
+        <span class="warning-label">Why this attempt is problematic under the correspondence principle</span>
+        This derivation imports mathematical structure and postulates flux conservation without deriving it. Under the relational correspondence principle, this is exactly the pattern the framework must learn to distrust. The discipline gained by the principle asks explicitly that this move be avoided.
+      </div>
+      <p>There is also an unresolved structural ambiguity: whether the coefficient should involve ωₘ² or ωₘ. This ambiguity remains an open problem.</p>
+      <p>An honest recovery of the Newtonian limit from the framework requires first deriving the metric structure of emergent relational space, showing that something analogous to flux conservation emerges naturally within that structure, and only then concluding 1/r² as a consequence. That work has not yet been completed. The proposal to invoke total relational information conservation as an alternative direction may offer a more coherent route, but it too remains undeveloped.</p>
+    </div>
+  </div>
+
+  <div class="closing">
+    <p>This Version 1 establishes the document as a standalone point of departure. Its aim is not to close the theory, but to clarify the conceptual architecture from which future technical work can begin.</p>
+    <p>The specific contributions of the framework to the reading of gravity are four: attunement as the fundamental dynamics rather than attraction; the structural identity between inertia and gravitational charge as a consequence of both being m; the qualitative distinction between how light and mass respond to gravitational fields; and the conservation of relational information as a structural brake on collapse. These four converge in the principle of minimum distinguishable difference.</p>
+    <p>The correspondence principle orders the relation between the framework and established physics. The critical question — what quantitative deviations the framework predicts relative to general relativity — defines the horizon on which the framework either gains or loses the status of an independent physical theory. The open problems on Planck-scale granularity, electric charge, and cosmic expansion mark distant but potentially fruitful directions for work.</p>
+    <p><strong>This document is a stabilized starting point for anyone wishing to continue the work. The natural continuation is not further stylistic polishing, but new technical work on one of the open problems identified here.</strong></p>
+  </div>
+
+</div>
+
+</body>
+</html>
