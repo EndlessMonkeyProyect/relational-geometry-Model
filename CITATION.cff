@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use or reference this research map, please cite the relevant Zenodo record listed in ZENODO.md."
+title: "Relational Geometry - A Model of Reality"
+authors:
+  - family-names: "Mata Sánchez"
+    given-names: "Luis Diego"
+repository-code: "https://github.com/EndlessMonkeyProyect/relational-geometry-Model"
+keywords:
+  - relational geometry
+  - dimensional emergence
+  - Mersenne spectrum
+  - proton radius
+  - atomic valence
+  - gravity
+  - ROSI
