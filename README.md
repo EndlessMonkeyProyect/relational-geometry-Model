@@ -1,7 +1,7 @@
 # Relational Geometry - A Model of Reality
 
-This repository is the curated public map of the Relational Geometry model by
-Luis Diego Mata Sánchez. It keeps the same research artifacts, but organizes
+This repository is the curated public map of the Relational Geometry model.
+It keeps the same research artifacts, but organizes
 them as a readable path: intuition first, foundations second, falsifiable
 claims third, computational work fourth, and provenance in the archive.
 
