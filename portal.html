@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relational Geometry — A Model of Reality · Le Matt Ansatz Di Ego</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #f7f5f0;
+  --bg2:     #edeae3;
+  --ink:     #1a1916;
+  --ink2:    #3a3834;
+  --muted:   #7a7870;
+  --faint:   #d8d5cc;
+  --navy:    #1a2e4a;
+  --gold:    #a0760a;
+  --gold-bg: #fdf3dc;
+  --serif:   'Figtree', system-ui, sans-serif;
+  --sans:    'Figtree', system-ui, sans-serif;
+  --mono:    'Figtree', system-ui, sans-serif;
+  --code:    'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--sans); font-weight: 400;
+  line-height: 1.7; overflow-x: hidden;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(26,46,74,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,46,74,0.028) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+#cosmos {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+.page { position: relative; z-index: 1; }
+.container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(247,245,240,0.88); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--faint);
+}
+.nav-inner {
+  max-width: 860px; margin: 0 auto; padding: 0 2rem;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: var(--mono); font-size: 11px; color: var(--navy); letter-spacing: 0.14em; text-decoration: none; font-weight: 400; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; padding: 7rem 2rem 5rem; position: relative; overflow: hidden;
+}
+.hero-cross { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.hero-content { position: relative; z-index: 1; }
+.hero-diagram { width: 270px; height: 270px; margin: 0 auto 2.5rem; opacity: 0; animation: fadeUp 1.2s ease forwards 0.2s; }
+.eyebrow {
+  font-family: var(--mono); font-size: 10px; font-weight: 400; color: var(--gold);
+  letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 1.5rem;
+  display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+  opacity: 0; animation: fadeUp 1s ease forwards 0.35s;
+}
+.eyebrow::before, .eyebrow::after { content: ''; height: 1px; width: 36px; background: var(--gold); opacity: 0.4; }
+h1 {
+  font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 400;
+  line-height: 1.05; color: var(--ink); margin-bottom: 0.5rem;
+  opacity: 0; animation: fadeUp 1s ease forwards 0.5s;
+}
+em { font-style: normal; font-weight: 500; color: var(--navy); }
+.hero-sub {
+  font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
+  color: var(--muted); margin-bottom: 2rem; opacity: 0; animation: fadeUp 1s ease forwards 0.65s;
+}
+.hero-desc {
+  max-width: 510px; font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 1s ease forwards 0.8s;
+}
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 1s ease forwards 0.95s; }
+
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.5rem; font-family: var(--sans); font-size: 13px; font-weight: 600;
+  letter-spacing: 0.04em; text-decoration: none; border-radius: 4px;
+  transition: all 0.18s; cursor: pointer; border: none;
+}
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: #253f63; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(26,46,74,0.18); }
+.btn-ghost { background: transparent; color: var(--ink2); border: 1.5px solid var(--faint); }
+.btn-ghost:hover { border-color: var(--navy); color: var(--navy); }
+
+/* AUTHOR STRIP */
+.author-strip {
+  border-top: 2px solid var(--navy); border-bottom: 1px solid var(--faint);
+  background: var(--bg2); padding: 0.85rem 2rem; text-align: center;
+  font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em;
+}
+
+/* SECTIONS */
+section { padding: 5rem 0; }
+.section-label {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+  font-family: var(--mono); font-size: 10px; color: var(--navy);
+  letter-spacing: 0.2em; text-transform: uppercase;
+}
+.section-label .tick { width: 2px; height: 24px; background: var(--navy); flex-shrink: 0; }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--faint); }
+h2 {
+  font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 400; color: var(--ink); margin-bottom: 1.25rem; line-height: 1.1;
+}
+h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--ink); margin-bottom: 0.6rem; }
+
+/* AXIOM GRID */
+.axiom-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1px; background: var(--faint); border: 1px solid var(--faint);
+  border-radius: 4px; overflow: hidden; margin-top: 2.5rem;
+}
+.axiom {
+  background: var(--bg); padding: 1.75rem; position: relative; transition: background 0.2s;
+}
+.axiom:hover { background: var(--bg2); }
+.axiom::after {
+  content: ''; position: absolute; bottom: 0; right: 0;
+  width: 16px; height: 16px;
+  border-bottom: 2px solid var(--navy); border-right: 2px solid var(--navy);
+  opacity: 0.15;
+}
+.axiom-n { font-family: var(--mono); font-size: 9px; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 0.85rem; display: block; }
+.axiom-sym { font-family: var(--serif); font-size: 2rem; color: var(--navy); margin-bottom: 0.65rem; display: block; opacity: 0.65; line-height: 1; }
+.axiom h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; }
+.axiom p { font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0; }
+
+/* MODULES */
+.module {
+  display: grid; grid-template-columns: 72px 1fr; gap: 2rem;
+  padding: 2.5rem 0; border-bottom: 1px solid var(--faint); align-items: start;
+}
+.module:last-child { border-bottom: none; }
+.module-n { font-family: var(--serif); font-size: 3.2rem; font-weight: 300; color: var(--faint); line-height: 1; letter-spacing: -0.05em; }
+.mod-tag {
+  display: inline-block; font-family: var(--mono); font-size: 9px;
+  color: var(--navy); border: 1px solid rgba(26,46,74,0.3);
+  padding: 2px 8px; border-radius: 2px; letter-spacing: 0.1em; margin-bottom: 0.6rem;
+}
+.topic-list { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.topic-list li { font-size: 13px; color: var(--muted); display: flex; align-items: flex-start; gap: 0.5rem; }
+.topic-list li::before { content: '⊥'; font-family: var(--mono); font-size: 10px; color: var(--navy); opacity: 0.45; flex-shrink: 0; margin-top: 0.15rem; }
+
+/* SCALE ROW */
+.scale-row {
+  display: flex; align-items: stretch; overflow: hidden;
+  border: 1px solid var(--faint); border-radius: 4px; margin: 2rem 0;
+}
+.scale-node {
+  flex: 1; padding: 1rem 0.75rem; background: var(--bg); text-align: center;
+  border-right: 1px solid var(--faint); position: relative; transition: background 0.2s;
+}
+.scale-node:last-child { border-right: none; }
+.scale-node:hover { background: var(--bg2); }
+.scale-node::after {
+  content: '→'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+  color: var(--navy); font-size: 10px; z-index: 2; font-family: var(--mono);
+}
+.scale-node:last-child::after { display: none; }
+.sc-name { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--ink); display: block; margin-bottom: 0.15rem; }
+.sc-sub { font-family: var(--mono); font-size: 9px; color: var(--muted); }
+
+/* FORMULA BLOCK */
+.formula-block {
+  background: var(--navy); color: #e0ecf8;
+  border-radius: 4px; padding: 1.5rem 2rem; font-family: var(--code); font-size: 14px; line-height: 2; margin: 2rem 0;
+}
+.formula-block .label { font-size: 9px; color: rgba(224,236,248,0.5); letter-spacing: 0.12em; margin-bottom: 0.4rem; display: block; text-transform: uppercase; }
+.formula-block .result { font-size: 11px; color: #a0c4e8; margin-top: 0.4rem; }
+
+/* DOC CARDS */
+.doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(238px, 1fr)); gap: 1rem; margin-top: 2rem; }
+.doc-card {
+  background: var(--bg); border: 1px solid var(--faint); border-radius: 4px; padding: 1.4rem 1.25rem;
+  text-decoration: none; display: flex; flex-direction: column; gap: 0.55rem;
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.doc-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 14px; height: 14px;
+  border-top: 2px solid var(--navy); border-left: 2px solid var(--navy);
+  opacity: 0; transition: opacity 0.22s; border-radius: 0 0 2px 0;
+}
+.doc-card:hover { background: var(--bg2); border-color: rgba(26,46,74,0.22); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(26,46,74,0.07); }
+.doc-card:hover::before { opacity: 1; }
+.doc-type { font-family: var(--mono); font-size: 9px; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; }
+.doc-title { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.doc-desc { font-size: 12.5px; color: var(--muted); line-height: 1.65; flex: 1; }
+.doc-link { font-family: var(--mono); font-size: 10px; color: var(--navy); letter-spacing: 0.04em; margin-top: 0.2rem; display: flex; align-items: center; gap: 0.3rem; text-decoration: none; }
+.doc-link:hover { text-decoration: underline; }
+.doc-card.zenodo { border-left: 3px solid var(--navy); }
+.doc-card.essay { border-left: 3px solid var(--gold); }
+.doc-card.wip { opacity: 0.52; border-style: dashed; }
+.doc-card.wip::before { display: none; }
+.badge { display: inline-block; font-family: var(--mono); font-size: 9px; padding: 1px 6px; border-radius: 2px; letter-spacing: 0.07em; vertical-align: middle; }
+.badge-z { background: rgba(26,46,74,0.1); color: var(--navy); }
+.badge-e { background: var(--gold-bg); color: var(--gold); }
+.badge-w { background: var(--bg2); color: var(--muted); border: 1px solid var(--faint); }
+
+/* STATUS */
+.status-block {
+  background: var(--bg2); border: 1px solid var(--faint); border-left: 3px solid var(--navy);
+  border-radius: 0 4px 4px 0; padding: 2rem 2.5rem; margin: 2.5rem 0;
+}
+.status-block h4 { font-family: var(--mono); font-size: 9px; color: var(--navy); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+.status-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.status-list li { font-size: 13.5px; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
+.status-list li::before { content: '◆'; font-size: 5px; color: var(--navy); flex-shrink: 0; }
+
+/* CONTACT */
+.contact-block {
+  background: var(--navy); color: #e0ecf8; border-radius: 4px; padding: 3rem;
+  text-align: center; margin-top: 2rem; position: relative; overflow: hidden;
+}
+.contact-block::before { content: '⊥'; position: absolute; font-family: var(--mono); font-size: 80px; color: rgba(255,255,255,0.04); top: -10px; left: 20px; line-height: 1; }
+.contact-block::after  { content: '⊥'; position: absolute; font-family: var(--mono); font-size: 80px; color: rgba(255,255,255,0.04); bottom: -20px; right: 20px; line-height: 1; }
+.contact-block h3 { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: #fff; margin-bottom: 0.5rem; }
+.contact-block p { font-size: 14px; color: rgba(224,236,248,0.7); max-width: 450px; margin: 0.5rem auto 2rem; }
+.contact-block .btn-ghost { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.2); }
+.contact-block .btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+
+/* FOOTER */
+footer {
+  border-top: 2px solid var(--navy); padding: 2rem; background: var(--bg2);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; flex-wrap: wrap; gap: 1rem;
+}
+footer a { color: var(--ink2); text-decoration: none; }
+footer a:hover { color: var(--navy); }
+
+.sep { height: 1px; background: var(--faint); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 640px) {
+  .module { grid-template-columns: 1fr; gap: 0.5rem; }
+  .scale-row { flex-direction: column; }
+  .scale-node { border-right: none; border-bottom: 1px solid var(--faint); }
+  .scale-node::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -12px; transform: translateX(-50%); }
+  .scale-node:last-child { border-bottom: none; }
+  .status-list { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">RGM ⊥</a>
+    <ul class="nav-links">
+      <li><a href="#empezar">Start</a></li>
+      <li><a href="#fundamentos">Claims</a></li>
+      <li><a href="#rosi">ROSI</a></li>
+      <li><a href="#documentos">Essays</a></li>
+      <li><a href="#preprints">Preprints</a></li>
+      <li><a href="#contribuir">Contribute</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-cross" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <line x1="600" y1="0" x2="600" y2="800" stroke="rgba(26,46,74,0.07)" stroke-width="1"/>
+    <line x1="0" y1="400" x2="1200" y2="400" stroke="rgba(26,46,74,0.07)" stroke-width="1"/>
+    <g stroke="rgba(26,46,74,0.13)" stroke-width="1">
+      <line x1="596" y1="100" x2="604" y2="100"/><line x1="596" y1="200" x2="604" y2="200"/>
+      <line x1="596" y1="300" x2="604" y2="300"/><line x1="596" y1="500" x2="604" y2="500"/>
+      <line x1="596" y1="600" x2="604" y2="600"/><line x1="596" y1="700" x2="604" y2="700"/>
+      <line x1="200" y1="396" x2="200" y2="404"/><line x1="400" y1="396" x2="400" y2="404"/>
+      <line x1="800" y1="396" x2="800" y2="404"/><line x1="1000" y1="396" x2="1000" y2="404"/>
+    </g>
+    <text x="610" y="54" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(26,46,74,0.18)">D(n)</text>
+    <text x="1140" y="418" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(26,46,74,0.18)">Ω₀</text>
+    <path d="M610 400 L610 390 L600 390" fill="none" stroke="rgba(26,46,74,0.22)" stroke-width="1.2"/>
+  </svg>
+
+  <div class="hero-content">
+    <svg class="hero-diagram" viewBox="0 0 270 270" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Diagram of relational projections">
+      <line x1="135" y1="28" x2="135" y2="242" stroke="rgba(26,46,74,0.12)" stroke-width="0.8"/>
+      <line x1="28"  y1="135" x2="242" y2="135" stroke="rgba(26,46,74,0.12)" stroke-width="0.8"/>
+      <path d="M143 135 L143 127 L135 127" fill="none" stroke="rgba(26,46,74,0.28)" stroke-width="0.8"/>
+      <circle cx="135" cy="135" r="108" stroke="rgba(26,46,74,0.09)" stroke-width="0.5" stroke-dasharray="3 5"/>
+      <circle cx="135" cy="135" r="74" stroke="rgba(26,46,74,0.14)" stroke-width="0.5" stroke-dasharray="2 4"/>
+      <circle cx="135" cy="135" r="44" stroke="rgba(160,118,10,0.4)" stroke-width="0.8"/>
+      <circle cx="135" cy="135" r="18" stroke="rgba(26,46,74,0.35)" stroke-width="0.8" fill="rgba(26,46,74,0.04)"/>
+      <circle cx="135" cy="135" r="4" fill="rgba(26,46,74,0.7)"/>
+      <line x1="135" y1="135" x2="135" y2="27" stroke="rgba(160,118,10,0.5)" stroke-width="0.7"/>
+      <line x1="135" y1="135" x2="229" y2="183" stroke="rgba(160,118,10,0.5)" stroke-width="0.7"/>
+      <line x1="135" y1="135" x2="41"  y2="183" stroke="rgba(160,118,10,0.5)" stroke-width="0.7"/>
+      <circle cx="135" cy="27"  r="3.8" fill="rgba(26,46,74,0.6)"/>
+      <circle cx="229" cy="183" r="3.8" fill="rgba(26,46,74,0.6)"/>
+      <circle cx="41"  cy="183" r="3.8" fill="rgba(26,46,74,0.6)"/>
+      <circle cx="135" cy="61"  r="2.8" fill="rgba(26,46,74,0.38)"/>
+      <circle cx="199" cy="172" r="2.8" fill="rgba(26,46,74,0.38)"/>
+      <circle cx="71"  cy="172" r="2.8" fill="rgba(26,46,74,0.38)"/>
+      <polygon points="135,27 229,183 41,183" stroke="rgba(26,46,74,0.1)" stroke-width="0.5" fill="rgba(26,46,74,0.025)"/>
+      <polygon points="135,61 199,172 71,172" stroke="rgba(160,118,10,0.14)" stroke-width="0.5" fill="rgba(160,118,10,0.03)"/>
+      <text x="142" y="25"  font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(160,118,10,0.8)">D₃</text>
+      <text x="234" y="186" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(160,118,10,0.8)">D₃</text>
+      <text x="22"  y="186" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(160,118,10,0.8)">D₃</text>
+      <text x="122" y="132" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(26,46,74,0.7)">Ω₀</text>
+      <circle cx="135" cy="135" r="18" stroke="rgba(26,46,74,0.1)" stroke-width="1.5" fill="none">
+        <animate attributeName="r" values="18;40;18" dur="3.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0;0.5" dur="3.5s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+
+    <p class="eyebrow">Relational geometry · Physical ontology · A falsifiable model</p>
+    <h1><em>Relational Geometry</em><br>Model</h1>
+    <p class="hero-sub">Not a framework for thinking about reality — a model of what reality is</p>
+    <p class="hero-desc">Space, time and mass are not the stage on which physics happens. They emerge from relation: successive projections of a single primordial difference. This is a model — it commits, it predicts, it can be wrong.</p>
+    <div class="hero-actions">
+      <a href="https://github.com/EndlessMonkeyProyect/relational-geometry-Model" target="_blank" class="btn btn-primary">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        View repository
+      </a>
+      <a href="#modulos" class="btn btn-ghost">Explore modules</a>
+      <a href="#preprints" class="btn btn-ghost">Zenodo preprints</a>
+    </div>
+  </div>
+</section>
+
+<div class="author-strip">
+  Le Matt Ansatz Di Ego &nbsp;·&nbsp; Cartago &nbsp;·&nbsp; <span style="color:var(--navy);">⊥</span> &nbsp;Ongoing exploratory research programme
+</div>
+
+<!-- START HERE -->
+<section id="empezar">
+  <div class="container">
+    <p class="section-label reveal"><span class="tick"></span>01 — Start here</p>
+    <h2 class="reveal">Before the math,<br>an <em>intuition</em></h2>
+
+    <p class="reveal" style="font-size:1.05rem; font-weight:400; color:var(--ink2); max-width:600px; margin:0.5rem 0 1.75rem; line-height:1.6; padding-left:1.25rem; border-left:2px solid var(--faint);">
+      "A monkey typing at random for an infinite time would almost surely write every text — every theory, every truth. This model is one of those pages. Not the final page, not the truth — a possible shape of structure in the noise."
+    </p>
+
+    <p class="reveal" style="font-size:15px; color:var(--ink2); max-width:620px; margin-bottom:1.5rem;">
+      You don't need equations to enter this model. You need one distinction.
+    </p>
+
+    <p class="reveal" style="font-size:14px; color:var(--muted); max-width:620px; margin-bottom:1rem;">
+      <strong style="color:var(--ink2);">To exist</strong> is to simply <em>be</em> — with no space, no time, no relation to anything else. Like the speed of light, or the bare nature of an elementary particle: a limit, not a thing sitting in a place.
+    </p>
+    <p class="reveal" style="font-size:14px; color:var(--muted); max-width:620px; margin-bottom:1.75rem;">
+      <strong style="color:var(--ink2);">To be existing</strong> is to <em>be in relation</em> — to need a link to another reference in order to project and take a place in the observable universe. Matter, distance, duration: all of it lives here.
+    </p>
+
+    <p class="reveal" style="font-size:14px; color:var(--muted); max-width:620px; margin-bottom:1.75rem;">
+      Our entire reality turns on the difference between what <em>exists</em> and what is <em>existing</em>. That difference has a measure — a relational radius. From there, the rest follows as a way of seeing: light is the first relation, not a magnitude; gravity is the slow erasing of differences; a dimension is simply room for information that did not fit before.
+    </p>
+
+    <p class="reveal" style="font-size:13px; color:var(--muted); max-width:620px;">
+      Everything below — the predictions, the code, the papers — is an attempt to take this single intuition seriously, and to let it be wrong out loud.
+    </p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- FOUNDATIONS -->
+<section id="fundamentos">
+  <div class="container">
+    <p class="section-label reveal"><span class="tick"></span>02 — What the model claims</p>
+    <h2 class="reveal">Four claims<br>the <em>model</em> makes</h2>
+    <p class="reveal" style="font-size:1.05rem; font-weight:400; color:var(--ink2); max-width:600px; margin-bottom:1rem; line-height:1.6; padding-left:1.25rem; border-left:2px solid var(--faint);">
+      "A dimension is a space for new information — information that did not fit within the previous frame and is stored in a tangential space."
+    </p>
+    <p class="reveal" style="font-size:14px; color:var(--muted); max-width:580px;">
+      The model proposes that physical reality does not inhabit a pre-existing space. Space itself emerges from primordial relations. Each relational projection generates a new orthogonal layer of structure — a new dimension.
+    </p>
+    <div class="axiom-grid reveal">
+      <div class="axiom">
+        <span class="axiom-n">AXIOM I</span>
+        <span class="axiom-sym">∅→ℝ</span>
+        <h4>Dimensional emergence</h4>
+        <p>Dimensions are not the stage of physics — they are its product. They emerge as spaces for information that cannot fit within the previous projection.</p>
+      </div>
+      <div class="axiom">
+        <span class="axiom-n">AXIOM II</span>
+        <span class="axiom-sym">𝒫(Ω)</span>
+        <h4>Generative principle</h4>
+        <p>A single primordial relation, acting recursively, generates the complete hierarchy of observed structures: photons, protons, atoms, cosmos.</p>
+      </div>
+      <div class="axiom">
+        <span class="axiom-n">AXIOM III</span>
+        <span class="axiom-sym">∇·g</span>
+        <h4>Gravity = information reduction</h4>
+        <p>Distance is information between particles. Gravity is the natural tendency of systems to reduce their informational differences down to the identity threshold.</p>
+      </div>
+      <div class="axiom">
+        <span class="axiom-n">AXIOM IV</span>
+        <span class="axiom-sym">ħ</span>
+        <h4>ħ as a relational ceiling</h4>
+        <p>ħ not as a lower bound but as a relational ceiling — the value at which the system closes coherently. All physical structure emerges from the partition of this primordial reference.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ESCALAS -->
+<section>
+  <div class="container">
+    <p class="section-label reveal"><span class="tick"></span>03 — Falsifiable predictions</p>
+    <h2 class="reveal">One geometry across<br>all scales</h2>
+    <p class="reveal" style="font-size:14px; color:var(--muted); max-width:560px; margin-bottom:0.5rem;">
+      Three concrete numerical predictions, verified against experimental data.
+    </p>
+    <div class="scale-row reveal">
+      <div class="scale-node"><span class="sc-name">Micro</span><span class="sc-sub">Proton · r_p = 4ħ/m_pc</span></div>
+      <div class="scale-node"><span class="sc-name">Meso</span><span class="sc-sub">Atom · P = 2ⁿ → Noble</span></div>
+      <div class="scale-node"><span class="sc-name">Macro</span><span class="sc-sub">V = ωR · geometric H₀</span></div>
+      <div class="scale-node"><span class="sc-name">Informational</span><span class="sc-sub">P prime → Reactivity</span></div>
+    </div>
+    <div class="formula-block reveal">
+      <span class="label">Central prediction — Proton charge radius</span>
+      r_p = 4 · ħ / (m_p · c) &nbsp;=&nbsp; <strong>0.841235 fm</strong>
+      <div class="result">CODATA 2018 experimental: 0.8414 fm &nbsp;·&nbsp; Relative deviation: −0.019% &nbsp;·&nbsp; No free parameters</div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ROSI -->
+<section id="rosi">
+  <div class="container">
+    <p class="section-label reveal"><span class="tick"></span>04 — Open computational layer</p>
+    <h2 class="reveal">ROSI — the model<br>you can <em>run</em></h2>
+    <p class="reveal" style="font-size:14px; color:var(--ink2); max-width:620px; margin-bottom:1.25rem;">
+      <strong>ROSI</strong> — Relational Orientation System for Information — is the runnable arm of the model. It takes its arithmetic backbone, the Mersenne closure spectrum <span style="font-family:var(--code);">Mε = 2ᵉ − 1</span>, and turns it into a small, transparent logical machine: ordered thresholds, a complete logic-gate set, and circuits you can actually execute and inspect.
+    </p>
+
+    <div class="formula-block reveal">
+      <span class="label">Arithmetic backbone</span>
+      Mε = 2ᵉ − 1 &nbsp;→&nbsp; M₁=1, M₂=3, M₃=7, <strong>M₄ = 15 = 3·5</strong>, M₅=31 …
+      <div class="result">First compositional closure at ε = 4 — the structural seat the model assigns to the proton.</div>
+    </div>
+
+    <p class="reveal" style="font-size:14px; color:var(--muted); max-width:620px; margin-bottom:0.6rem;">
+      It is offered in <strong style="color:var(--ink2);">open mode</strong>, in three senses:
+    </p>
+    <ul class="topic-list reveal" style="max-width:620px; margin-bottom:2rem;">
+      <li><strong style="color:var(--ink2);">Open source</strong> — run it, read every line, fork it.</li>
+      <li><strong style="color:var(--ink2);">Open about its limits</strong> — ROSI organises structure; it does not yet derive the numerical parameters of the Standard Model. That boundary is stated plainly, not hidden.</li>
+      <li><strong style="color:var(--ink2);">Open invitation</strong> — break it, stress it, extend it. The filter is the criterion, not the source.</li>
+    </ul>
+
+    <h3 class="reveal" style="margin-top:1rem;">Tools &amp; toys <span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:0.12em;">— SPACE RESERVED · IN DEVELOPMENT</span></h3>
+    <p class="reveal" style="font-size:13.5px; color:var(--muted); max-width:620px; margin-bottom:0.5rem;">
+      A space held open for small interactive pieces to play with ROSI directly in the browser. Built as the model matures.
+    </p>
+    <div class="doc-grid">
+      <div class="doc-card wip reveal">
+        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
+        <span class="doc-title">Mersenne spectrum explorer</span>
+        <span class="doc-desc">Walk the spectrum Mε, watch each value factor, and see why ε = 4 is the first compositional closure.</span>
+      </div>
+      <div class="doc-card wip reveal">
+        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
+        <span class="doc-title">Logic-gate playground</span>
+        <span class="doc-desc">Build circuits from the complete relational gate set {OR, XOR, NOT} and run them step by step.</span>
+      </div>
+      <div class="doc-card wip reveal">
+        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
+        <span class="doc-title">Collatz testbed</span>
+        <span class="doc-desc">Watch ROSI's grammar against the Collatz map's odd-step absorption structure.</span>
+      </div>
+      <div class="doc-card wip reveal">
+        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
+        <span class="doc-title">Relational micro-OS</span>
+        <span class="doc-desc">Step through the four-layer relational architecture — from threshold to conditional execution.</span>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:1rem;justify-content:flex-start;flex-wrap:wrap;margin-top:2rem;">
+      <a href="https://github.com/EndlessMonkeyProyect/relational-geometry-Model" target="_blank" class="btn btn-primary">Get the ROSI code</a>
+      <a href="#contribuir" class="btn btn-ghost">Help build the tools</a>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- MODULES -->
+<section id="modulos">
+  <div class="container">
+    <p class="section-label reveal"><span class="tick"></span>05 — Inside the repository</p>
+    <h2 class="reveal">How the work<br>is organised</h2>
+    <div style="margin-top:1.5rem;">
+      <div class="module reveal">
+        <div class="module-n">01</div>
+        <div>
+          <span class="mod-tag">Foundations</span>
+          <h3>Ontological and geometric foundations</h3>
+          <p style="font-size:14px;color:var(--muted);">Core principles of relational emergence. This module establishes the ontological scaffolding of the model.</p>
+          <ul class="topic-list">
+            <li>A dimension as a space for new information</li>
+            <li>The identity radius: minimum difference between trajectories</li>
+            <li>Space as emergence of a present-difference relative to c</li>
+            <li>ħ as the primordial relational ceiling</li>
+          </ul>
+        </div>
+      </div>
+      <div class="module reveal">
+        <div class="module-n">02</div>
+        <div>
+          <span class="mod-tag">Relational Framework</span>
+          <h3>The relational projection geometry</h3>
+          <p style="font-size:14px;color:var(--muted);">The central geometric apparatus and its applications to gravity and cosmology.</p>
+          <ul class="topic-list">
+            <li>Gravity as the elimination of relational information</li>
+            <li>Hubble's law as a geometric projection V = ωR</li>
+            <li>Black holes as frequency divergences (R→0)</li>
+            <li>Geometric estimate H₀ ≈ 2.27 × 10⁻¹⁸ s⁻¹</li>
+          </ul>
+        </div>
+      </div>
+      <div class="module reveal">
+        <div class="module-n">03</div>
+        <div>
+          <span class="mod-tag">Physical Scales</span>
+          <h3>Applications to physical scales</h3>
+          <p style="font-size:14px;color:var(--muted);">Concrete predictions verified experimentally across three scales of nature.</p>
+          <ul class="topic-list">
+            <li>r_p = 4ħ/(m_p·c) — matches CODATA 2018 within 0.02%</li>
+            <li>Noble gases: stability when P = 2ⁿ</li>
+            <li>Reactivity: correlation when P is prime</li>
+            <li>Perfect correlation with s-p block ionisation energies</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ESSAYS -->
+<section id="documentos">
+  <div class="container">
+    <p class="section-label reveal"><span class="tick"></span>06 — Conceptual essays</p>
+    <h2 class="reveal">Articles and essays</h2>
+    <p class="reveal" style="font-size:14px;color:var(--muted);margin-bottom:0.5rem;">
+      Pieces that develop the central intuitions of the model — from what a dimension is to the symbolic role of Pythagoras.
+    </p>
+    <div class="doc-grid">
+      <div class="doc-card essay reveal">
+        <span class="doc-type">Conceptual essay <span class="badge badge-e">ES / EN</span></span>
+        <span class="doc-title">A Dimension as Space for New Information</span>
+        <span class="doc-desc">A dimension as a container for information that does not fit within the previous frame. Like a wave, an atomic radius gaining an electron, or the third point emerging from a line.</span>
+      </div>
+      <div class="doc-card essay reveal">
+        <span class="doc-type">Conceptual essay <span class="badge badge-e">ES</span></span>
+        <span class="doc-title">Gravity as a Mechanism for Eliminating Relational Information</span>
+        <span class="doc-desc">Distance is relational information between two systems. Gravity is the natural consequence of particles attempting to reduce their differences down to the identity radius threshold.</span>
+      </div>
+      <div class="doc-card essay reveal">
+        <span class="doc-type">Bilingual essay <span class="badge badge-e">ES / EN</span></span>
+        <span class="doc-title">Primero Fue Light — First Came Light</span>
+        <span class="doc-desc">A thought experiment on the initial state without differences. The photon as a latent difference in the present. Light as the first marker of distinction between two nearly identical trajectories.</span>
+      </div>
+      <div class="doc-card essay reveal">
+        <span class="doc-type">Theoretical note <span class="badge badge-e">ES</span></span>
+        <span class="doc-title">Planck as a Primordial Relational Ceiling</span>
+        <span class="doc-desc">ħ not as a lower bound but as a relational ceiling — the value at which the system closes coherently. All physical diversity arises from new ways of relating to the same reference.</span>
+      </div>
+      <div class="doc-card essay reveal">
+        <span class="doc-type">Philosophical essay <span class="badge badge-e">ES</span></span>
+        <span class="doc-title">Pythagoras' "Memory" as Symbol</span>
+        <span class="doc-desc">Why the same theorem recurs across distinct cultures. An invariant waiting in the structure of space. Includes a proton radius calculation with ~2% deviation as a motivating case.</span>
+      </div>
+      <div class="doc-card essay reveal">
+        <span class="doc-type">Foundational essay <span class="badge badge-e">ES</span></span>
+        <span class="doc-title">Compton: The Boundary Between Being and Existing</span>
+        <span class="doc-desc">A complete geometric model of existence. The universe as exhaustion of relational information. Spin as the product of magnitudes that are not exact multiples of ħ. A falsifiable, open model.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- PREPRINTS -->
+<section id="preprints">
+  <div class="container">
+    <p class="section-label reveal"><span class="tick"></span>07 — Research with falsifiable predictions</p>
+    <h2 class="reveal">Preprints on Zenodo</h2>
+    <p class="reveal" style="font-size:14px;color:var(--muted);margin-bottom:0.5rem;">
+      Documents with concrete derivations and verifiable numerical predictions, all available open access.
+    </p>
+    <div class="doc-grid">
+      <a href="https://zenodo.org/records/17807496" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Preprint · MICRO <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Geometric Derivation of the Proton Charge Radius</span>
+        <span class="doc-desc">r_p = 4ħ/(m_p·c). Prediction: 0.841235 fm. CODATA 2018: 0.8414 fm. Deviation: −0.019%. Geometric resonance condition with no free parameters.</span>
+        <span class="doc-link">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+          zenodo.org/records/17807496
+        </span>
+      </a>
+      <a href="https://zenodo.org/records/17810804" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Preprint · MESO <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Informational Symmetry and Noble Gases</span>
+        <span class="doc-desc">Stability when P = 2ⁿ (noble gases). Reactivity when P is prime. Perfect correlation with s-p block ionisation energies without parameter fitting.</span>
+        <span class="doc-link">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+          zenodo.org/records/17810804
+        </span>
+      </a>
+      <a href="https://zenodo.org/records/17808981" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Preprint · MACRO <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Hubble's Law as a Geometric Projection V = ωR</span>
+        <span class="doc-desc">Not metric expansion of space, but a geometric projection. Black holes as frequency divergences (R→0). Geometric estimate H₀ ≈ 2.27×10⁻¹⁸ s⁻¹ from pure geometry.</span>
+        <span class="doc-link">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+          zenodo.org/records/17808981
+        </span>
+      </a>
+      <a href="https://zenodo.org/records/17639218" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Conceptual basis <span class="badge badge-z">Zenodo · ES</span></span>
+        <span class="doc-title">Relational Geometry Framework: Conceptual Basis</span>
+        <span class="doc-desc">Full ontological foundation of the research programme. Description of the relational-geometric framework, the identity radius, and the emergence of dimensions.</span>
+        <span class="doc-link">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+          zenodo.org/records/17639218
+        </span>
+      </a>
+          <a href="https://zenodo.org/records/18701688" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Preprint Â· FOUNDATIONS <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Minimal Generative Algebraic Model of Dimensional Emergence</span>
+        <span class="doc-desc">Algebraic development of relational geometry and dimensional emergence from generative projection principles.</span>
+        <span class="doc-link">zenodo.org/records/18701688</span>
+      </a>
+      <a href="https://zenodo.org/records/18763083" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Preprint Â· FOUNDATIONS <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Emergent Dimensionality via Reduction of Relational Radius R</span>
+        <span class="doc-desc">Conduction, optical guiding, and magnetism read as constraints on relational degrees of freedom.</span>
+        <span class="doc-link">zenodo.org/records/18763083</span>
+      </a>
+      <a href="https://zenodo.org/records/19141411" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Preprint Â· GRAVITY <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Relational Geometry and the Emergence of Gravity</span>
+        <span class="doc-desc">From harmonic closure to stellar structure, with the TOV correction and computational artifacts preserved in the repository.</span>
+        <span class="doc-link">zenodo.org/records/19141411</span>
+      </a>
+      <a href="https://zenodo.org/records/15808667" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Protocol Â· BEC <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Pre-registered BEC Fluctuation Suppression Protocol</span>
+        <span class="doc-desc">Experimental protocol for testing a proposed universal critical radius in multicolor optical lattices.</span>
+        <span class="doc-link">zenodo.org/records/15808667</span>
+      </a>
+      <a href="https://zenodo.org/records/17288570" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Preprint Â· HARMONICS <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Harmonic Interference as Origin of Matter</span>
+        <span class="doc-desc">Minimal formalization and preliminary validation of a harmonic-interference model of matter.</span>
+        <span class="doc-link">zenodo.org/records/17288570</span>
+      </a>
+      <a href="https://zenodo.org/records/20363352" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">ROSI Â· COMPUTATIONAL <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Relational Orientation System for Information</span>
+        <span class="doc-desc">Formal specification of the relational engine and Lambda Difference Mechanism; latest Zenodo metadata record.</span>
+        <span class="doc-link">zenodo.org/records/20363352</span>
+      </a>
+    </div>
+
+    <div class="status-block reveal">
+      <h4>Programme status · June 2026</h4>
+      <ul class="status-list">
+        <li>10 Zenodo records curated as the public research map</li>
+        <li>6 conceptual essays written</li>
+        <li>Predictions verified at 3 physical scales</li>
+        <li>Internal geometric coherence documented</li>
+        <li>Formal mathematical development ongoing</li>
+        <li>ROSI computational core implemented — tools in development</li>
+        <li>Open to critique and interdisciplinary collaboration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- CONTRIBUTE -->
+<section id="contribuir">
+  <div class="container">
+    <p class="section-label reveal"><span class="tick"></span>08 — Collaboration</p>
+    <h2 class="reveal">Contribute and discuss</h2>
+    <div class="contact-block reveal">
+      <h3>An open model, on purpose</h3>
+      <p>This is one page in the endless typing. Constructive feedback, formal critique, and collaborative development are all welcome — consistency objections most of all. The aim is to rigorously separate what holds from what must be reformulated.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;">
+        <a href="https://github.com/EndlessMonkeyProyect/relational-geometry-Model/issues" target="_blank" class="btn btn-primary">Open a discussion on GitHub</a>
+        <a href="https://github.com/EndlessMonkeyProyect/relational-geometry-Model" target="_blank" class="btn btn-ghost">Full repository</a>
+        <a href="https://www.reddit.com/user/Endless-monkey/submitted/" target="_blank" class="btn btn-ghost">Reddit — Endless-monkey</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div><span style="color:var(--navy);font-size:14px;vertical-align:middle;">⊥</span> <strong>Relational Geometry Model</strong> &nbsp;·&nbsp; Le Matt Ansatz Di Ego &nbsp;·&nbsp; Cartago</div>
+  <div>
+    <a href="https://github.com/EndlessMonkeyProyect/relational-geometry-Model" target="_blank">GitHub</a> &nbsp;·&nbsp;
+    <a href="https://zenodo.org" target="_blank">Zenodo</a> &nbsp;·&nbsp;
+    Exploratory research · 2025–2026
+  </div>
+</footer>
+
+<script>
+/* ── COSMOS INVERTIDO ─────────────────────────────────────────
+   Nebulosas como manchas de tinta oscura sobre papel.
+   Estrellas como puntos de tinta que parpadean.
+   El negativo conceptual del universo.
+──────────────────────────────────────────────────────────────*/
+(function () {
+  const canvas = document.getElementById('cosmos');
+  const ctx    = canvas.getContext('2d');
+
+  /* Paleta — oscuro sobre claro */
+  const INK_NAVY = 'rgba(26,46,74,';
+  const INK_SLATE= 'rgba(40,55,80,';
+  const INK_GOLD = 'rgba(120,88,10,';
+  const INK_ROSE = 'rgba(60,40,50,';
+
+  let W, H, stars = [], clouds = [];
+  let raf;
+
+  /* ── RESIZE ── */
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    buildScene();
+  }
+
+  /* ── BUILD SCENE ── */
+  function buildScene() {
+    /* Stars — dark ink dots, different densities */
+    stars = [];
+    const count = Math.floor((W * H) / 5500);
+    for (let i = 0; i < count; i++) {
+      const r = Math.random();
+      stars.push({
+        x:     Math.random() * W,
+        y:     Math.random() * H,
+        /* most are tiny (0.3–1.1px), a few are larger "deep" stars */
+        size:  r < 0.85 ? 0.3 + Math.random() * 0.8
+                        : 1.2 + Math.random() * 1.6,
+        /* base opacity — very low so content stays legible */
+        alpha: r < 0.85 ? 0.06 + Math.random() * 0.13
+                        : 0.10 + Math.random() * 0.18,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.0003 + Math.random() * 0.0006,
+        /* colour family */
+        ink:   Math.random() < 0.75 ? INK_NAVY
+             : Math.random() < 0.6  ? INK_SLATE
+             : Math.random() < 0.5  ? INK_GOLD
+                                    : INK_ROSE,
+      });
+    }
+
+    /* Nebula clouds — soft radial ink washes */
+    clouds = [];
+    const cloudDefs = [
+      /* [cx_frac, cy_frac, rx, ry, ink, alpha, rotate] */
+      [0.15, 0.20, W*0.32, H*0.22, INK_NAVY,  0.032, -20],
+      [0.78, 0.12, W*0.28, H*0.20, INK_SLATE, 0.028,  15],
+      [0.50, 0.55, W*0.40, H*0.28, INK_NAVY,  0.022,   5],
+      [0.88, 0.70, W*0.30, H*0.22, INK_GOLD,  0.020, -10],
+      [0.08, 0.80, W*0.26, H*0.20, INK_ROSE,  0.018,  30],
+      [0.60, 0.90, W*0.35, H*0.18, INK_NAVY,  0.015, -5 ],
+      [0.35, 0.35, W*0.22, H*0.16, INK_SLATE, 0.014,  12],
+    ];
+    for (const [xf, yf, rx, ry, ink, a, rot] of cloudDefs) {
+      clouds.push({ x: xf*W, y: yf*H, rx, ry, ink, a, rot: rot*(Math.PI/180) });
+    }
+  }
+
+  /* ── DRAW CLOUDS ── */
+  function drawClouds() {
+    for (const c of clouds) {
+      ctx.save();
+      ctx.translate(c.x, c.y);
+      ctx.rotate(c.rot);
+      ctx.scale(1, c.ry / c.rx);
+
+      /* Outer wash */
+      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, c.rx);
+      g.addColorStop(0.00, c.ink + (c.a * 1.0) + ')');
+      g.addColorStop(0.35, c.ink + (c.a * 0.7) + ')');
+      g.addColorStop(0.65, c.ink + (c.a * 0.3) + ')');
+      g.addColorStop(1.00, c.ink + '0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(0, 0, c.rx, 0, Math.PI * 2);
+      ctx.fill();
+
+      /* Inner condensation core */
+      const g2 = ctx.createRadialGradient(0, 0, 0, 0, 0, c.rx * 0.3);
+      g2.addColorStop(0,   c.ink + (c.a * 0.6) + ')');
+      g2.addColorStop(1,   c.ink + '0)');
+      ctx.fillStyle = g2;
+      ctx.beginPath();
+      ctx.arc(0, 0, c.rx * 0.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+  }
+
+  /* ── DRAW STARS (animated) ── */
+  function drawStars(t) {
+    for (const s of stars) {
+      const flicker = 0.55 + 0.45 * Math.sin(t * s.speed * 1000 + s.phase);
+      const a = s.alpha * flicker;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      ctx.fillStyle = s.ink + a + ')';
+      ctx.fill();
+    }
+  }
+
+  /* ── RENDER LOOP ── */
+  let cloudsDrawn = false;
+  /* Clouds are static — draw once onto an offscreen canvas,
+     then composite each frame (performance). */
+  let offscreen;
+
+  function buildOffscreen() {
+    offscreen = document.createElement('canvas');
+    offscreen.width  = W;
+    offscreen.height = H;
+    const oc = offscreen.getContext('2d');
+    /* Swap ctx temporarily */
+    const orig = ctx;
+    Object.defineProperty(window, '_tmpCtx', { value: oc, configurable: true });
+    /* Draw clouds into offscreen */
+    const save = ctx;
+    drawCloudsTo(oc);
+  }
+
+  function drawCloudsTo(c) {
+    for (const cl of clouds) {
+      c.save();
+      c.translate(cl.x, cl.y);
+      c.rotate(cl.rot);
+      c.scale(1, cl.ry / cl.rx);
+      const g = c.createRadialGradient(0,0,0,0,0,cl.rx);
+      g.addColorStop(0.00, cl.ink+(cl.a*1.0)+')');
+      g.addColorStop(0.35, cl.ink+(cl.a*0.7)+')');
+      g.addColorStop(0.65, cl.ink+(cl.a*0.3)+')');
+      g.addColorStop(1.00, cl.ink+'0)');
+      c.fillStyle = g;
+      c.beginPath(); c.arc(0,0,cl.rx,0,Math.PI*2); c.fill();
+      const g2 = c.createRadialGradient(0,0,0,0,0,cl.rx*0.3);
+      g2.addColorStop(0,cl.ink+(cl.a*0.6)+')');
+      g2.addColorStop(1,cl.ink+'0)');
+      c.fillStyle = g2;
+      c.beginPath(); c.arc(0,0,cl.rx*0.3,0,Math.PI*2); c.fill();
+      c.restore();
+    }
+  }
+
+  function frame(t) {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Nebulas (from offscreen cache) */
+    if (offscreen) ctx.drawImage(offscreen, 0, 0);
+
+    /* Twinkling stars */
+    drawStars(t);
+
+    raf = requestAnimationFrame(frame);
+  }
+
+  /* Init */
+  window.addEventListener('resize', () => { cancelAnimationFrame(raf); resize(); buildOffscreen(); requestAnimationFrame(frame); });
+  resize();
+  buildOffscreen();
+  requestAnimationFrame(frame);
+})();
+
+/* ── SCROLL REVEAL ── */
+const els = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), (i % 5) * 55);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,73 +1,63 @@
-# Relational Geometry Framework
-### An Ontological and Geometrodynamic Exploration
+# Relational Geometry - A Model of Reality
 
-This repository presents an exploratory relational–geometric framework that seeks to describe the emergence of physical structure from a generative relational principle.
+This repository is the curated public map of the Relational Geometry model by
+Luis Diego Mata Sánchez. It keeps the same research artifacts, but organizes
+them as a readable path: intuition first, foundations second, falsifiable
+claims third, computational work fourth, and provenance in the archive.
 
-The work proposes that dimensions, physical interactions, and structural stability emerge from successive relational projections rather than from pre-existing spatial containers.
+The model is ongoing, open to correction, and stated as a candidate structure
+that can be tested against measurement, internal consistency, and independent
+formal reconstruction.
 
----
+## The central distinction
 
-## 🌌 Conceptual Scope
+- **To exist**: to simply be, without space, time, or relation.
+- **To be existing**: to be in relation; to project into an observable structure
+  through links, scales, rhythms, and constraints.
 
-The framework explores connections across physical scales:
+The repository asks what follows if physical structure is read as successive
+relational projection rather than as content placed inside a pre-existing
+container.
 
-- Emergence of dimensionality
-- Cosmology and gravitational structure
-- Hadronic structure and proton radius
-- Atomic valence and chemical bonding
-- Informational symmetry and structural stability
+## Repository map
 
-This repository is not presented as a closed physical theory, but as a coherent conceptual architecture designed to stimulate formal development and testable inquiry.
+| Step | Folder | Purpose |
+| --- | --- | --- |
+| 1 | [`01_intuition/`](01_intuition/) | Plain-language entry point and Spanish foundational essay. |
+| 2 | [`02_foundations/`](02_foundations/) | Dimensional emergence, closure arithmetic, and the Mersenne spectrum. |
+| 3 | [`03_predictions/`](03_predictions/) | Proton radius, atomic stability, chemistry, gravity, black holes, and TOV artifacts. |
+| 4 | [`04_rosi/`](04_rosi/) | ROSI computational layer, with links to the dedicated ROSI repository and Zenodo record. |
+| 5 | [`05_reading/`](05_reading/) | Reading guide across local PDFs and public Zenodo records. |
+| - | [`archive/`](archive/) | Earlier framings and superseded gravity drafts kept for provenance. |
+| - | [`docs/`](docs/) | GitHub Pages portal. |
 
----
+Open the web portal locally at [`portal.html`](portal.html), or publish
+[`docs/index.html`](docs/index.html) with GitHub Pages.
 
-## 📁 Repository Structure
+## Zenodo map
 
-### 01_foundations
-Fundamental ontological and geometric principles of relational emergence.
+The complete publication index is maintained in [`ZENODO.md`](ZENODO.md).
 
-### 02_relational_framework
-Geometric projection framework and applications to gravity and cosmology.
+| Area | Record | DOI |
+| --- | --- | --- |
+| Conceptual basis | [17639218](https://zenodo.org/records/17639218) | `10.5281/zenodo.17639218` |
+| Algebraic dimensional emergence | [18701688](https://zenodo.org/records/18701688) | `10.5281/zenodo.18701688` |
+| Relational dimensionality | [18763083](https://zenodo.org/records/18763083) | `10.5281/zenodo.18763083` |
+| Proton charge radius | [17807496](https://zenodo.org/records/17807496) | `10.5281/zenodo.17807496` |
+| Atomic valence | [17810804](https://zenodo.org/records/17810804) | `10.5281/zenodo.17810804` |
+| Cosmological dualities | [17808981](https://zenodo.org/records/17808981) | `10.5281/zenodo.17808981` |
+| Gravity and stellar structure | [19141411](https://zenodo.org/records/19141411) | `10.5281/zenodo.19141411` |
+| BEC protocol | [15808667](https://zenodo.org/records/15808667) | `10.5281/zenodo.15808667` |
+| Harmonic interference | [17288570](https://zenodo.org/records/17288570) | `10.5281/zenodo.17288570` |
+| ROSI latest metadata | [20363352](https://zenodo.org/records/20363352) | `10.5281/zenodo.20363352` |
 
-### 03_physical_scales
-Applications across physical scales:
+## Current status
 
-- hadronic → proton structure
-- atomic → valence symmetry & bonding
+- This is an exploratory research program, not a completed physical theory.
+- Numerical correspondences are exposed as targets for verification or failure.
+- Earlier framings are preserved in `archive/` rather than hidden.
+- ROSI is linked as a computational companion, but the dedicated implementation
+  lives in its own repository.
 
----
-
-## 🎯 Purpose
-
-The aim of this work is to:
-
-- explore relational geometry as a generative framework
-- unify intuition across physical scales
-- propose testable connections between geometry and physical observables
-- encourage interdisciplinary discussion
-
----
-
-## ⚠️ Status
-
-This is an exploratory research program.
-
-Its value is proposed in terms of:
-
-- conceptual coherence
-- geometric economy
-- cross-scale explanatory power
-- potential falsifiable implications
-
----
-
-## 👤 Author
-
-Luis Diego Mata Sánchez  
-Cartago, Costa Rica
-
----
-
-## 🤝 Contributions & Discussion
-
-Constructive feedback, formal critique, and collaborative development are welcome.
+Constructive critique, consistency objections, reproduction attempts, and
+formal counter-derivations are welcome.
