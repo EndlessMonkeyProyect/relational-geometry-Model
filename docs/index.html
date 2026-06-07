@@ -52,7 +52,7 @@ nav {
   max-width: 860px; margin: 0 auto; padding: 0 2rem;
   height: 52px; display: flex; align-items: center; justify-content: space-between;
 }
-.nav-logo { font-family: var(--mono); font-size: 11px; color: var(--navy); letter-spacing: 0.14em; text-decoration: none; font-weight: 400; }
+.nav-logo { display: block; min-width: 104px; font-family: var(--mono); font-size: 11px; color: var(--navy); letter-spacing: 0.14em; text-decoration: none; font-weight: 400; }
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
 .nav-links a:hover { color: var(--ink); }
@@ -495,7 +495,7 @@ footer a:hover { color: var(--navy); }
 
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#">R₀ · V₁ · E₂ · A₃</a>
+    <span class="nav-logo" aria-hidden="true"></span>
     <ul class="nav-links">
       <li><a href="#empezar">Start</a></li>
       <li><a href="#fundamentos">Claims</a></li>
@@ -738,30 +738,20 @@ footer a:hover { color: var(--navy); }
       <li><strong style="color:var(--ink2);">Open invitation</strong> — break it, stress it, extend it. The filter is the criterion, not the source.</li>
     </ul>
 
-    <h3 class="reveal" style="margin-top:1rem;">Tools &amp; toys <span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:0.12em;">— SPACE RESERVED · IN DEVELOPMENT</span></h3>
+    <h3 class="reveal" style="margin-top:1rem;">Active tools <span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:0.12em;">— PUBLIC SANDBOXES</span></h3>
     <p class="reveal" style="font-size:13.5px; color:var(--muted); max-width:620px; margin-bottom:0.5rem;">
-      A space held open for small interactive pieces to play with ROSI directly in the browser. Built as the model matures.
+      Small interactive pieces that can be used now in the browser. Planned tools are kept separate so the ROSI section shows what is actually available.
     </p>
     <div class="doc-grid">
+      <a href="../04_rosi/tools/rosi-lab.html" class="doc-card reveal">
+        <span class="doc-type">Interactive <span class="badge badge-z">Live</span></span>
+        <span class="doc-title">ROSI Lab: compare routes</span>
+        <span class="doc-desc">Paste a question and several candidate answers. The browser sandbox returns conserved roots, residue, and discriminating information without exposing the ROSI core.</span>
+      </a>
       <div class="doc-card wip reveal">
-        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
-        <span class="doc-title">Mersenne spectrum explorer</span>
-        <span class="doc-desc">Walk the spectrum Mε, watch each value factor, and see why ε = 4 is the first compositional closure.</span>
-      </div>
-      <div class="doc-card wip reveal">
-        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
-        <span class="doc-title">Logic-gate playground</span>
-        <span class="doc-desc">Build circuits from the complete relational gate set {OR, XOR, NOT} and run them step by step.</span>
-      </div>
-      <div class="doc-card wip reveal">
-        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
-        <span class="doc-title">Collatz testbed</span>
-        <span class="doc-desc">Watch ROSI's grammar against the Collatz map's odd-step absorption structure.</span>
-      </div>
-      <div class="doc-card wip reveal">
-        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
-        <span class="doc-title">Relational micro-OS</span>
-        <span class="doc-desc">Step through the four-layer relational architecture — from threshold to conditional execution.</span>
+        <span class="doc-type">Interface <span class="badge badge-w">planned</span></span>
+        <span class="doc-title">LLM conciliation interface</span>
+        <span class="doc-desc">Future workspace for comparing model answers, preserving residues, and converging without treating consensus as truth.</span>
       </div>
     </div>
 
