@@ -45,8 +45,10 @@ The complete publication index is maintained in [`ZENODO.md`](ZENODO.md).
 | Relational dimensionality | [18763083](https://zenodo.org/records/18763083) | `10.5281/zenodo.18763083` |
 | Proton charge radius | [17807496](https://zenodo.org/records/17807496) | `10.5281/zenodo.17807496` |
 | Atomic valence | [17810804](https://zenodo.org/records/17810804) | `10.5281/zenodo.17810804` |
+| Redox closure nodes | [20573845](https://zenodo.org/records/20573845) | `10.5281/zenodo.20573845` |
 | Cosmological dualities | [17808981](https://zenodo.org/records/17808981) | `10.5281/zenodo.17808981` |
 | Gravity and stellar structure | [19141411](https://zenodo.org/records/19141411) | `10.5281/zenodo.19141411` |
+| Relational difference redistribution | [20578888](https://zenodo.org/records/20578888) | `10.5281/zenodo.20578888` |
 | BEC protocol | [15808667](https://zenodo.org/records/15808667) | `10.5281/zenodo.15808667` |
 | Harmonic interference | [17288570](https://zenodo.org/records/17288570) | `10.5281/zenodo.17288570` |
 | ROSI latest metadata | [20363352](https://zenodo.org/records/20363352) | `10.5281/zenodo.20363352` |
