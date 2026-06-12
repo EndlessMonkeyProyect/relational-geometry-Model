@@ -18,6 +18,14 @@ Zenodo: https://zenodo.org/records/17807496
 
 Zenodo: https://zenodo.org/records/17810804
 
+## Continuum dynamics
+
+- [`continuum_dynamics/navier_stokes__redistribution_v2.pdf`](continuum_dynamics/navier_stokes__redistribution_v2.pdf) -
+  version 2 of the accumulated-difference redistribution model for
+  incompressible flow.
+
+Zenodo: https://zenodo.org/records/20578888
+
 ## Macro
 
 - [`black_holes__geometric_limits.pdf`](black_holes__geometric_limits.pdf)
