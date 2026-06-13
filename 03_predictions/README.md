@@ -15,8 +15,13 @@ Zenodo: https://zenodo.org/records/17807496
 
 - [`periodic_table__harmonic_weights.pdf`](periodic_table__harmonic_weights.pdf)
 - [`chemical_bonding__topological_model.pdf`](chemical_bonding__topological_model.pdf)
+- [`closure_node_post_audit/`](closure_node_post_audit/) - post-audit article,
+  conclusion ledger, and audit data for the closure-node redox-richness line.
 
-Zenodo: https://zenodo.org/records/17810804
+Zenodo:
+
+- https://zenodo.org/records/17810804
+- https://zenodo.org/records/20573845
 
 ## Continuum dynamics
 

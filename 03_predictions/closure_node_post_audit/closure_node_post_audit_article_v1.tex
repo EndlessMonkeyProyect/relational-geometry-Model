@@ -1,0 +1,372 @@
+\section{Abstract}\label{abstract}
+
+This note closes the current stage of the closure-node / redox-richness
+programme. The initial record, \emph{Closure-Node Registration},
+proposed that redox richness can be read as where unresolved relational
+difference is registered relative to an electronic closure node. In the
+transition-metal seed dataset, the descriptor
+
+\[
+d_{\mathrm{balance}}=1-|N_d-5|/5
+\]
+
+organizes oxidation-state count and span better than linear or monotonic
+baselines. The post-audit conclusion is narrower: this is a compact
+quantitative encoding of the known half-filled-shell pattern, not a
+demonstrated predictor superior to a fair quadratic baseline in the same
+filling coordinate.
+
+The subsequent actinide and radius--complement tests sharpen the
+epistemic status further. Static \(f\)-balance, static \(s:d:f\)
+fractions, and a quadratic radius--complement representation all fail to
+establish predictive novelty once degree-of-freedom-matched baselines
+and label audits are applied. A first non-circular redox-couple
+potential test also fails to show predictive advantage. The programme
+should therefore be framed as a \textbf{generative mechanism framework}:
+it creates relational coordinates, hypotheses, and falsifiable
+experimental designs, but it is not yet a validated predictor of
+chemical redox behaviour.
+
+\section{1. Position}\label{position}
+
+The correct current claim is:
+
+\[
+\boxed{\text{The framework generates interpretable relational descriptions and falsifiable tests; it is not yet a validated predictive model.}}
+\]
+
+The descriptor and geometry developed so far are useful as
+\emph{mechanism screens}. They are not yet useful as independently
+validated predictors. This distinction should be explicit in the
+abstract, introduction, and conclusion of any public article.
+
+\section{2. Experiment 1: Closure-node registration
+record}\label{experiment-1-closure-node-registration-record}
+
+The first associated experiment is the Zenodo v1 record:
+
+\begin{itemize}
+\tightlist
+\item
+  Title: \emph{Closure-Node Registration: Redox richness as the
+  signature of where unresolved relational difference is registered
+  relative to a closure node --- and two regimes of one event in the d-
+  and f-blocks}.
+\item
+  DOI: \texttt{10.5281/zenodo.20573845}.
+\item
+  Published: 8 June 2026.
+\item
+  Resource type: preprint.
+\item
+  Files: \texttt{CLOSURE\_NODE\_REGISTRATION.pdf} and
+  \texttt{ROSI\_article\_support\_2026-06-06.zip}.
+\end{itemize}
+
+The original d-block result remains reproducible from the archived
+support data: \texttt{d\_balance} obtains LOSO-RMSE \(1.2259\) for
+oxidation-state count and \(1.4755\) for oxidation span, versus
+\(1.6483\) and \(1.9708\) for a linear \(N_d\) baseline.
+
+However, the fair comparison is not against linear \(N_d\). Since
+\(d_{\mathrm{balance}}\) is an affine transform of \(|N_d-5|\), it
+already imposes a tent-shaped peak at half filling. The fair baseline is
+a quadratic in \(N_d\), or a quadratic in \(|N_d-5|\).
+
+\section{3. Resolution of the lyo\_bench
+critique}\label{resolution-of-the-lyo_bench-critique}
+
+The Reddit critique correctly identifies four required fixes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  compare against quadratic filling baselines, not only linear \(N_d\);
+\item
+  bootstrap model-comparison error, not only the \(d^5\) local mean
+  contrast;
+\item
+  respect the leave-one-series-out design by block/cluster bootstrapping
+  at the series level;
+\item
+  lock the oxidation-state source and model set before fitting.
+\end{enumerate}
+
+The series-block bootstrap below uses the same three blocks as the LOSO
+design: \(3d\), \(4d\), and \(5d\). With only three clusters the
+intervals are still coarse, but they are more honest than element-wise
+resampling.
+
+\subsection{3.1 Count models}\label{count-models}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+model & LOSO\_RMSE & AICc\_in\_sample \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+d\_balance & 1.226 & 10.743 \\
+Nd linear & 1.648 & 34.641 \\
+Nd quadratic & 1.291 & 11.700 \\
+& Nd-5 & quadratic \\
+group & 1.657 & 34.616 \\
+period+group & 1.751 & 36.303 \\
+\end{longtable}
+
+\subsection{3.2 Span models}\label{span-models}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+model & LOSO\_RMSE & AICc\_in\_sample \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+d\_balance & 1.475 & 24.950 \\
+Nd linear & 1.971 & 45.061 \\
+Nd quadratic & 1.509 & 22.701 \\
+& Nd-5 & quadratic \\
+group & 1.993 & 45.056 \\
+period+group & 1.994 & 46.574 \\
+\end{longtable}
+
+\subsection{3.3 Series-block bootstrap of RMSE
+differences}\label{series-block-bootstrap-of-rmse-differences}
+
+Here
+
+\[
+\Delta RMSE = RMSE(d_{\mathrm{balance}}) - RMSE(\text{baseline}).
+\]
+
+Negative values favour \texttt{d\_balance}.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+target
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+baseline
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+delta\_full
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+ci\_low
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+ci\_high
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+prop\_candidate\_better
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+count & Nd linear & -0.422 & -0.686 & -0.024 & 1.000 \\
+count & Nd quadratic & -0.065 & -0.292 & 0.109 & 0.704 \\
+count & & Nd-5 & quadratic & 0.004 & -0.018 \\
+span & Nd linear & -0.495 & -0.633 & -0.416 & 1.000 \\
+span & Nd quadratic & -0.034 & -0.522 & 0.306 & 0.704 \\
+span & & Nd-5 & quadratic & -0.001 & -0.062 \\
+\end{longtable}
+
+The interpretation is now stable:
+
+\[
+\boxed{d_{\mathrm{balance}}\ \text{beats baselines that cannot represent a peak, but not the fair curved filling baselines.}}
+\]
+
+For count, the difference against \(N_d+N_d^2\) crosses zero. Against
+quadratic \(|N_d-5|\), it is essentially a tie. For span, the same
+pattern holds.
+
+\section{4. What survives from the d-block
+result}\label{what-survives-from-the-d-block-result}
+
+The d-block experiment should be described as a compact quantitative
+restatement of known chemistry:
+
+\[
+\boxed{d_{\mathrm{balance}}\ \text{encodes the half-filled-shell symmetry, not a new independent chemical law.}}
+\]
+
+The useful parts are:
+
+\begin{itemize}
+\tightlist
+\item
+  the effect is organized by symmetry about \(d^5\);
+\item
+  it is not well described by strictly monotonic properties alone;
+\item
+  it provides a clean sanity check for the framework;
+\item
+  it forces a falsifiable distinction between compact representation and
+  predictive novelty.
+\end{itemize}
+
+The not-yet-supported parts are:
+
+\begin{itemize}
+\tightlist
+\item
+  ``out-predicts electron count'' as a headline;
+\item
+  ``new predictor'' relative to quadratic filling;
+\item
+  any claim that RGM/ROSI is validated by the d-block dataset.
+\end{itemize}
+
+\section{5. Associated experiments and current
+status}\label{associated-experiments-and-current-status}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+experiment\_id
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+main\_candidate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+strongest\_baseline
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+status
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+E1 & Closure-node d-block seed (Zenodo 20573845) & d\_balance = 1- &
+Nd-5 & /5 \\
+E2 & Chemical-property confound audit & d\_balance added after monotonic
+property quadratics & EN+EN\^{}2, IE+IE\^{}2, radius+radius\^{}2 & not a
+proxy for monotonic properties; still textbook filling symmetry \\
+E3 & Actinide f-balance stress test & f\_balance around f7 & Nf +
+Nf\^{}2 & negative/partial stress test \\
+E4 & Actinide s-d-f static fraction test & P3, entropy, electron-hole
+terms & Nf + Nf\^{}2 / Nf(14-Nf) & static orbital fractions
+insufficient \\
+E5 & Quadratic radius-complement state/edge screen & R=sqrt(x),
+Rbar=sqrt(1-x) & DOF-matched polynomial in same occupancy fractions;
+state-output edge baseline & interpretive representation only; predictor
+claim falsified in this screen \\
+E6 & External redox-couple potential test & radius-complement deltas & Z
++ charge/delta-charge & first non-circular predictive test negative \\
+\end{longtable}
+
+\section{6. Post-audit conclusion for radius--complement
+geometry}\label{post-audit-conclusion-for-radiuscomplement-geometry}
+
+The radius--complement construction
+
+\[
+R_i=\sqrt{x_i},\qquad \bar R_i=\sqrt{1-x_i},\qquad R_i^2+\bar R_i^2=1
+\]
+
+is interpretively attractive because it separates occupation from
+complement. The product \(R_i\bar R_i\) highlights half filling without
+manually adding a half-filled rule.
+
+But the post-audit result is negative:
+
+\[
+\boxed{\text{The transformation does not add predictive information beyond flexible polynomials in the same occupancies.}}
+\]
+
+The constructed transition-edge task is also not independent when the
+label is defined as the conjunction of two endpoint state labels.
+Therefore it cannot validate a transition geometry without external
+redox-couple data.
+
+\section{7. First non-circular redox-couple
+test}\label{first-non-circular-redox-couple-test}
+
+The first non-circular test used redox-couple potentials for U, Np, Pu,
+and Am in acidic aqueous solution. The target was no longer ``state
+observed'' or ``edge observed'', but an external potential \(E^0\).
+
+The result is negative: simple \(Z\)-and-charge baselines outperform
+radius--complement deltas in leave-one-element-out testing.
+
+This closes the current predictive claim:
+
+\[
+\boxed{\text{No current experiment establishes predictive novelty for the closure-node or radius--complement descriptors.}}
+\]
+
+\section{8. What the article should now
+say}\label{what-the-article-should-now-say}
+
+A publication-quality article should state:
+
+\begin{quote}
+The closure-node and radius--complement constructions are generative
+relational coordinates. They can propose hypotheses, organize known
+patterns, and define falsifiable experiments. In the present experiments
+they do not yet outperform fair baselines, so they should not be
+presented as validated predictors.
+\end{quote}
+
+Recommended framing:
+
+\[
+\boxed{\text{generation of falsifiable mechanisms, not prediction.}}
+\]
+
+\section{9. Response to lyo\_bench}\label{response-to-lyo_bench}
+
+A concise public response can be:
+
+\begin{quote}
+You were right on the fair baseline and the bootstrap granularity. I
+reran the model comparison with quadratic filling baselines and a
+series-block bootstrap. The descriptor still robustly beats linear
+\(N_d\), but it does not beat \(N_d+N_d^2\) or quadratic \(|N_d-5|\).
+The current status is therefore: compact encoding of half-filled-shell
+symmetry, not a predictor established beyond the fair curved filling
+baseline. I also agree that the oxidation-state source must be locked
+before any stronger claim. The follow-up actinide and radius--complement
+tests were treated as falsifier-driven screens; they did not establish
+predictive novelty. The framework is useful as a generator of hypotheses
+and tests, not yet as a validated chemical predictor.
+\end{quote}
+
+\section{10. Final conclusion}\label{final-conclusion}
+
+The most honest closure is:
+
+\[
+\boxed{\text{The framework has generated useful coordinates and falsifiers, but the predictor claim is currently negative.}}
+\]
+
+The scientific value at this stage is not a successful predictor. It is
+the disciplined conversion of a relational intuition into reproducible
+tests, fair baselines, and falsifiable next steps.
+
+\section{References}\label{references}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  L. D. Mata Sánchez, \emph{Closure-Node Registration}, Zenodo record
+  \texttt{10.5281/zenodo.20573845}, 2026.
+\item
+  \texttt{ROSI\_article\_support\_2026-06-06.zip}, supplementary support
+  archive attached to Zenodo record \texttt{10.5281/zenodo.20573845}.
+\item
+  Public lyo\_bench Reddit critique, treated here as an audit prompt
+  rather than a bibliographic source.
+\end{enumerate}

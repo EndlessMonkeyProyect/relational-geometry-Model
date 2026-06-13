@@ -43,6 +43,8 @@ private engine separate.
 
 - ROSI latest metadata record: https://zenodo.org/records/20363352
 - Closure-Node Registration: https://zenodo.org/records/20573845
+- Closure-node post-audit local companion:
+  `../../03_predictions/closure_node_post_audit/`
 - Navier-Stokes as relational difference redistribution:
   https://zenodo.org/records/20578888
 
@@ -56,4 +58,3 @@ For a public submission or reviewer handoff, share these files first:
 4. `PUBLISHING_BOUNDARIES.md`
 
 Use `LLM_COLLABORATOR_PROMPT.md` when the receiver is another AI system.
-

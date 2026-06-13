@@ -1,0 +1,21 @@
+target,model,features,status,r2,rmse,loo_series_rmse
+oxidation_state_count,A,P3,estimable,0.03907702,1.56023659,1.64037429
+oxidation_state_count,B,Pd,estimable,0.00582320,1.58700386,1.63544333
+oxidation_state_count,C,d_balance,estimable,0.55165864,1.06573830,1.22590252
+oxidation_state_count,D,Nd,estimable,0.00557720,1.58720018,1.64830554
+oxidation_state_count,E,group,estimable,0.00643275,1.58651727,1.65669746
+oxidation_state_count,F,period + group,estimable,0.03866959,1.56056732,1.75132706
+oxidation_state_count,G,period + d_balance,estimable,0.59741671,1.00988993,1.44126059
+oxidation_state_count,H,period + group + d_balance,estimable,0.66087975,0.92687897,1.49832772
+oxidation_state_count,I,period + group + P3,estimable,0.13433894,1.48088083,1.72401342
+oxidation_state_count,J,period + group + Pd,estimable,0.06272354,1.54091975,1.68238394
+oxidation_span,A,P3,estimable,0.05064670,1.83982932,1.90528790
+oxidation_span,B,Pd,estimable,0.00282039,1.88560317,1.95212655
+oxidation_span,C,d_balance,estimable,0.48851382,1.35045637,1.47545620
+oxidation_span,D,Nd,estimable,0.00007045,1.88820136,1.97076166
+oxidation_span,E,group,estimable,0.00023608,1.88804497,1.99314482
+oxidation_span,F,period + group,estimable,0.03809834,1.85194865,1.99377187
+oxidation_span,G,period + d_balance,estimable,0.54001922,1.28065883,1.54101586
+oxidation_span,H,period + group + d_balance,estimable,0.63217127,1.14521341,1.58457557
+oxidation_span,I,period + group + P3,estimable,0.12354862,1.76777716,1.92638019
+oxidation_span,J,period + group + Pd,estimable,0.04649032,1.84385242,2.03300561
