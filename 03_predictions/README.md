@@ -28,6 +28,14 @@ Zenodo:
 - [`continuum_dynamics/navier_stokes__redistribution_v2.pdf`](continuum_dynamics/navier_stokes__redistribution_v2.pdf) -
   version 2 of the accumulated-difference redistribution model for
   incompressible flow.
+- [`continuum_dynamics/redistribution_model_unified_v1.pdf`](continuum_dynamics/redistribution_model_unified_v1.pdf) -
+  unified fixed-regime redistribution manuscript with exact balances,
+  closures, finite-band prediction, and falsifiers.
+- [`continuum_dynamics/geometric_octave_structure_v1.pdf`](continuum_dynamics/geometric_octave_structure_v1.pdf) -
+  geometric companion proposing octave structure inside the continuum band,
+  with operational tests and stated limits.
+- [`continuum_dynamics/INTEGRATION_LEDGER.md`](continuum_dynamics/INTEGRATION_LEDGER.md) -
+  provenance and status ledger for the July 2026 continuum additions.
 
 Zenodo: https://zenodo.org/records/20578888
 
