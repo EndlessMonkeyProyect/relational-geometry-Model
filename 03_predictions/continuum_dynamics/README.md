@@ -11,7 +11,7 @@ branch of the prediction layer.
   unified fixed-regime manuscript. Mathematical status: derived within the
   stated model. Physical status: open until a medium realizing the two-channel
   linear sector is identified and tested.
-- [`geometric_octave_structure_v1.pdf`](geometric_octave_structure_v1.pdf) -
+- [`geometric_octave_structure_v2.pdf`](geometric_octave_structure_v2.pdf) -
   geometric companion linking the continuum band to a relational-radius octave
   structure. Status: programmatic and falsifiable, not a completed physical
   validation.

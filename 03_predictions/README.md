@@ -31,7 +31,7 @@ Zenodo:
 - [`continuum_dynamics/redistribution_model_unified_v1.pdf`](continuum_dynamics/redistribution_model_unified_v1.pdf) -
   unified fixed-regime redistribution manuscript with exact balances,
   closures, finite-band prediction, and falsifiers.
-- [`continuum_dynamics/geometric_octave_structure_v1.pdf`](continuum_dynamics/geometric_octave_structure_v1.pdf) -
+- [`continuum_dynamics/geometric_octave_structure_v2.pdf`](continuum_dynamics/geometric_octave_structure_v2.pdf) -
   geometric companion proposing octave structure inside the continuum band,
   with operational tests and stated limits.
 - [`continuum_dynamics/INTEGRATION_LEDGER.md`](continuum_dynamics/INTEGRATION_LEDGER.md) -

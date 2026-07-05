@@ -17,9 +17,9 @@ state that the physical bridge has been closed.
   - Limit: physical prediction remains open until a medium realizing the
     two-channel linear sector with `c^2 > nu*lambda` is identified.
 
-- `geometric_octave_structure_v1.pdf`
-  - Source file reviewed: `geometric_octave_structure1.pdf`
-  - SHA256: `39D3FB4AC42C136BD5B92E26D52E6626B3D3A3B15FB011A08F16017048F385C4`
+- `geometric_octave_structure_v2.pdf`
+  - Source file reviewed: `geometric_octave_structure_2.pdf`
+  - SHA256: `A6615C47B5E22D3A16591A57D22FEDA4BB0848E4BAA786C3FD6BA2245C451938`
   - Status: programmatic geometric companion.
   - Scope: derives an octave ladder, transfer ledger, and operational
     log-periodic detection protocol from the relational-radius ontology.
