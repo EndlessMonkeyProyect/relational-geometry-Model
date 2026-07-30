@@ -8,6 +8,8 @@ of dimensions, relational radius, closure arithmetic, and the Mersenne spectrum.
 - [`relational_geometry__emergence_of_dimensions.pdf`](relational_geometry__emergence_of_dimensions.pdf)
 - [`relational_dimensional_emergence.pdf`](relational_dimensional_emergence.pdf)
 - [`orientational_uncertainty__mersenne_spectrum.pdf`](orientational_uncertainty__mersenne_spectrum.pdf)
+- [`relational_geometry_minimal_economy_uncertainty_en_v1.pdf`](relational_geometry_minimal_economy_uncertainty_en_v1.pdf) - English version of the minimal-economy and uncertainty foundation note.
+- [`geometria_relacional_economia_minima_incertidumbre_es_v1.pdf`](geometria_relacional_economia_minima_incertidumbre_es_v1.pdf) - Spanish version of the same foundation note.
 - [`pending_sign_recursion_anchor_v1.pdf`](pending_sign_recursion_anchor_v1.pdf) -
   anchor note on pending-sign recursion, growth modes, and explicit limits.
 - [`mersenne_spectrum.py`](mersenne_spectrum.py) - reproducible standard-library
@@ -16,11 +18,24 @@ of dimensions, relational radius, closure arithmetic, and the Mersenne spectrum.
 
 ## Status note
 
+The minimal-economy and uncertainty notes are bilingual foundation mirrors. They
+frame the economy criterion and uncertainty vocabulary as an interpretive layer
+of the model, not as independent empirical validation.
+
 The pending-sign recursion material is included as an anchor note: it fixes an
 internal arithmetic result and its connection to the octave structure, but it
 does not claim that physical crystals, biological growth, or discharge
 branching have been demonstrated to follow this mechanism. The current bridge
 to physical prediction remains open and should be stated as such.
+
+## Provenance
+
+- `relational_geometry_minimal_economy_uncertainty_en_v1.pdf`
+  - Source file: `Relational_Geometry_Minimal_Economy_Uncertainty_EN_v1.pdf`
+  - SHA256: `40416066E0EC4DBC26B7D5F56C3C4B0B88318AF8B623BE39910478221ABCF447`
+- `geometria_relacional_economia_minima_incertidumbre_es_v1.pdf`
+  - Source file: `Geometria_Relacional_Economia_Minima_Incertidumbre_ES_v1.pdf`
+  - SHA256: `25DEFA9DF838452BF3E16D094F1CDCD90463E81F17C279C4E25E711F6ED2E563`
 
 ## Related Zenodo records
 
