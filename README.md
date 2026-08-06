@@ -24,7 +24,7 @@ container.
 | Step | Folder | Purpose |
 | --- | --- | --- |
 | 1 | [`01_intuition/`](01_intuition/) | Plain-language entry point and Spanish foundational essay. |
-| 2 | [`02_foundations/`](02_foundations/) | Dimensional emergence, closure arithmetic, and the Mersenne spectrum. |
+| 2 | [`02_foundations/`](02_foundations/) | Minimum economy, dimensional emergence, closure arithmetic, and the Mersenne spectrum. |
 | 3 | [`03_predictions/`](03_predictions/) | Proton radius, atomic stability, chemistry, gravity, black holes, continuum dynamics, and TOV artifacts. |
 | 4 | [`04_rosi/`](04_rosi/) | ROSI computational layer, public shareable briefs, tools, and links to the dedicated ROSI repository and Zenodo record. |
 | 5 | [`05_reading/`](05_reading/) | Reading guide across local PDFs and public Zenodo records. |
