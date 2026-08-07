@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://endlessmonkeyproyect.github.io/relational-geometry-Model/04_rosi/shareable/rosi_cycle_output.schema.json",
+  "title": "Public ROSI Cycle Output",
+  "description": "Minimal public schema for shareable ROSI route-comparison examples. This is not the protected core engine output.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "epistemic_status",
+    "problem",
+    "prompt_roots",
+    "routes",
+    "discriminating_information_requests",
+    "warnings"
+  ],
+  "properties": {
+    "epistemic_status": {
+      "type": "string",
+      "enum": [
+        "public_toy_model",
+        "public_bridge",
+        "programmatic_not_validated"
+      ]
+    },
+    "problem": {
+      "type": "string"
+    },
+    "prompt_roots": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "routes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "summary",
+          "conserved_roots",
+          "missing_roots",
+          "new_roots",
+          "visible_residue",
+          "state"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "summary": { "type": "string" },
+          "conserved_roots": {
+            "type": "array",
+            "items": { "type": "string" },
+            "uniqueItems": true
+          },
+          "missing_roots": {
+            "type": "array",
+            "items": { "type": "string" },
+            "uniqueItems": true
+          },
+          "new_roots": {
+            "type": "array",
+            "items": { "type": "string" },
+            "uniqueItems": true
+          },
+          "visible_residue": {
+            "type": "array",
+            "items": { "type": "string" },
+            "uniqueItems": true
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "alive_latency",
+              "traceable_closure",
+              "latent_roots",
+              "insufficient_traceability"
+            ]
+          }
+        }
+      }
+    },
+    "common_roots": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "discriminating_information_requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["target", "needed", "purpose"],
+        "properties": {
+          "target": { "type": "string" },
+          "needed": { "type": "string" },
+          "purpose": { "type": "string" }
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
+

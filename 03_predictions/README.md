@@ -15,8 +15,29 @@ Zenodo: https://zenodo.org/records/17807496
 
 - [`periodic_table__harmonic_weights.pdf`](periodic_table__harmonic_weights.pdf)
 - [`chemical_bonding__topological_model.pdf`](chemical_bonding__topological_model.pdf)
+- [`closure_node_post_audit/`](closure_node_post_audit/) - post-audit article,
+  conclusion ledger, and audit data for the closure-node redox-richness line.
 
-Zenodo: https://zenodo.org/records/17810804
+Zenodo:
+
+- https://zenodo.org/records/17810804
+- https://zenodo.org/records/20573845
+
+## Continuum dynamics
+
+- [`continuum_dynamics/navier_stokes__redistribution_v2.pdf`](continuum_dynamics/navier_stokes__redistribution_v2.pdf) -
+  version 2 of the accumulated-difference redistribution model for
+  incompressible flow.
+- [`continuum_dynamics/redistribution_model_unified_v1.pdf`](continuum_dynamics/redistribution_model_unified_v1.pdf) -
+  unified fixed-regime redistribution manuscript with exact balances,
+  closures, finite-band prediction, and falsifiers.
+- [`continuum_dynamics/geometric_octave_structure_v2.pdf`](continuum_dynamics/geometric_octave_structure_v2.pdf) -
+  geometric companion proposing octave structure inside the continuum band,
+  with operational tests and stated limits.
+- [`continuum_dynamics/INTEGRATION_LEDGER.md`](continuum_dynamics/INTEGRATION_LEDGER.md) -
+  provenance and status ledger for the July 2026 continuum additions.
+
+Zenodo: https://zenodo.org/records/20578888
 
 ## Macro
 

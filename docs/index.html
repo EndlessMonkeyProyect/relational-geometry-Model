@@ -52,7 +52,7 @@ nav {
   max-width: 860px; margin: 0 auto; padding: 0 2rem;
   height: 52px; display: flex; align-items: center; justify-content: space-between;
 }
-.nav-logo { font-family: var(--mono); font-size: 11px; color: var(--navy); letter-spacing: 0.14em; text-decoration: none; font-weight: 400; }
+.nav-logo { display: block; min-width: 104px; font-family: var(--mono); font-size: 11px; color: var(--navy); letter-spacing: 0.14em; text-decoration: none; font-weight: 400; }
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
 .nav-links a:hover { color: var(--ink); }
@@ -87,6 +87,8 @@ em { font-style: normal; font-weight: 500; color: var(--navy); }
   max-width: 510px; font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 3rem;
   opacity: 0; animation: fadeUp 1s ease forwards 0.8s;
 }
+.quote-desc { max-width: 650px; font-size: 14.5px; line-height: 1.85; margin-bottom: 0.85rem; }
+.quote-source { font-family: var(--mono); font-size: 10px; color: var(--gold); letter-spacing: 0.06em; margin-bottom: 3rem; opacity: 0; animation: fadeUp 1s ease forwards 0.86s; }
 .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 1s ease forwards 0.95s; }
 
 /* BUTTONS */
@@ -144,6 +146,141 @@ h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(
 .axiom h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; }
 .axiom p { font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0; }
 
+/* MINIMAL AXIOM CARDS */
+.axiom-grid.minimal {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.85rem;
+  background: transparent;
+  border: none;
+  overflow: visible;
+}
+.axiom-grid.minimal .axiom {
+  border: 1px solid rgba(26,46,74,0.12);
+  border-radius: 10px;
+  background: rgba(247,245,240,0.74);
+  padding: 1.35rem 1.35rem 1.45rem;
+  box-shadow: 0 10px 30px rgba(26,46,74,0.035);
+}
+.axiom-grid.minimal .axiom:hover {
+  background: rgba(237,234,227,0.78);
+  transform: translateY(-1px);
+}
+.axiom-grid.minimal .axiom::after { display: none; }
+.axiom-grid.minimal .axiom-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.95rem;
+}
+.axiom-grid.minimal .axiom-n {
+  margin-bottom: 0;
+  color: var(--muted);
+  opacity: 0.7;
+}
+.axiom-grid.minimal .axiom-sym {
+  font-family: var(--code);
+  font-size: 1.15rem;
+  color: var(--navy);
+  opacity: 0.78;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+.axiom-grid.minimal .axiom h4 {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.axiom-grid.minimal .axiom p {
+  font-size: 13.2px;
+  line-height: 1.68;
+}
+.symbol-note {
+  margin-top: 1.25rem;
+  font-size: 12.5px;
+  color: var(--muted);
+  max-width: 640px;
+  line-height: 1.65;
+}
+.symbol-note strong { color: var(--ink2); }
+
+/* LINKED AXIOM CARDS */
+.axiom-grid.linked {
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: 0.95rem;
+}
+.axiom-grid.linked .axiom {
+  text-align: center;
+  padding: 1.45rem 1.25rem 1.3rem;
+}
+.axiom-grid.linked .axiom-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-bottom: 0.95rem;
+}
+.axiom-grid.linked .axiom-n {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  opacity: 0.82;
+}
+.axiom-grid.linked .axiom-sym {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: "Cambria Math", "STIX Two Text", "Times New Roman", serif;
+  font-size: 2.15rem;
+  line-height: 1.1;
+  color: var(--navy);
+  opacity: 0.92;
+  margin: 0.1rem 0 0;
+}
+.axiom-grid.linked .axiom h4 {
+  font-family: var(--serif);
+  font-size: 1.04rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.axiom-grid.linked .axiom p {
+  font-size: 13.2px;
+  line-height: 1.72;
+  max-width: 28ch;
+  margin: 0 auto;
+}
+.axiom-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+.axiom-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.36rem 0.65rem;
+  border: 1px solid rgba(26,46,74,0.14);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--navy);
+  letter-spacing: 0.05em;
+  transition: all 0.18s;
+}
+.axiom-link:hover {
+  background: rgba(26,46,74,0.06);
+  border-color: rgba(26,46,74,0.28);
+  transform: translateY(-1px);
+}
+
+
+
 /* MODULES */
 .module {
   display: grid; grid-template-columns: 72px 1fr; gap: 2rem;
@@ -159,6 +296,42 @@ h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(
 .topic-list { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.3rem; }
 .topic-list li { font-size: 13px; color: var(--muted); display: flex; align-items: flex-start; gap: 0.5rem; }
 .topic-list li::before { content: '⊥'; font-family: var(--mono); font-size: 10px; color: var(--navy); opacity: 0.45; flex-shrink: 0; margin-top: 0.15rem; }
+.topic-list a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(26,46,74,0.12);
+  transition: color 0.18s, border-color 0.18s;
+}
+.topic-list a:hover {
+  color: var(--navy);
+  border-color: rgba(26,46,74,0.42);
+}
+.module-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.module-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.34rem 0.68rem;
+  border: 1px solid rgba(26,46,74,0.16);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.45);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--navy);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.18s;
+}
+.module-link:hover {
+  background: rgba(26,46,74,0.06);
+  border-color: rgba(26,46,74,0.32);
+  transform: translateY(-1px);
+}
+
 
 /* SCALE ROW */
 .scale-row {
@@ -171,6 +344,20 @@ h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(
 }
 .scale-node:last-child { border-right: none; }
 .scale-node:hover { background: var(--bg2); }
+.scale-node {
+  text-decoration: none;
+  color: inherit;
+}
+.scale-node:focus-visible {
+  outline: 2px solid rgba(26,46,74,0.35);
+  outline-offset: -2px;
+}
+.scale-node .sc-sub {
+  transition: color 0.18s;
+}
+.scale-node:hover .sc-sub {
+  color: var(--navy);
+}
 .scale-node::after {
   content: '→'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
   color: var(--navy); font-size: 10px; z-index: 2; font-family: var(--mono);
@@ -194,6 +381,8 @@ h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(
   text-decoration: none; display: flex; flex-direction: column; gap: 0.55rem;
   transition: all 0.2s; position: relative; overflow: hidden;
 }
+a.doc-card { cursor: pointer; }
+a.doc-card:focus-visible { outline: 2px solid rgba(26,46,74,0.38); outline-offset: 3px; }
 .doc-card::before {
   content: ''; position: absolute; top: 0; left: 0; width: 14px; height: 14px;
   border-top: 2px solid var(--navy); border-left: 2px solid var(--navy);
@@ -210,6 +399,39 @@ h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(
 .doc-card.essay { border-left: 3px solid var(--gold); }
 .doc-card.wip { opacity: 0.52; border-style: dashed; }
 .doc-card.wip::before { display: none; }
+.article-intro {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 640px;
+  margin-bottom: 1.4rem;
+}
+.article-group {
+  margin-top: 2rem;
+}
+.article-group-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--navy);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.article-group-title::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: var(--faint);
+}
+.doc-kicker {
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.55;
+  margin-top: -0.15rem;
+}
+
 .badge { display: inline-block; font-family: var(--mono); font-size: 9px; padding: 1px 6px; border-radius: 2px; letter-spacing: 0.07em; vertical-align: middle; }
 .badge-z { background: rgba(26,46,74,0.1); color: var(--navy); }
 .badge-e { background: var(--gold-bg); color: var(--gold); }
@@ -273,7 +495,7 @@ footer a:hover { color: var(--navy); }
 
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#">RGM ⊥</a>
+    <span class="nav-logo" aria-hidden="true"></span>
     <ul class="nav-links">
       <li><a href="#empezar">Start</a></li>
       <li><a href="#fundamentos">Claims</a></li>
@@ -325,20 +547,21 @@ footer a:hover { color: var(--navy); }
       <circle cx="71"  cy="172" r="2.8" fill="rgba(26,46,74,0.38)"/>
       <polygon points="135,27 229,183 41,183" stroke="rgba(26,46,74,0.1)" stroke-width="0.5" fill="rgba(26,46,74,0.025)"/>
       <polygon points="135,61 199,172 71,172" stroke="rgba(160,118,10,0.14)" stroke-width="0.5" fill="rgba(160,118,10,0.03)"/>
-      <text x="142" y="25"  font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(160,118,10,0.8)">D₃</text>
-      <text x="234" y="186" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(160,118,10,0.8)">D₃</text>
-      <text x="22"  y="186" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(160,118,10,0.8)">D₃</text>
-      <text x="122" y="132" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(26,46,74,0.7)">Ω₀</text>
+      <text x="142" y="25"  font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(160,118,10,0.8)">V₁</text>
+      <text x="234" y="186" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(160,118,10,0.8)">E₂</text>
+      <text x="22"  y="186" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(160,118,10,0.8)">A₃</text>
+      <text x="122" y="132" font-family="JetBrains Mono, monospace" font-size="8" fill="rgba(26,46,74,0.7)">R₀</text>
       <circle cx="135" cy="135" r="18" stroke="rgba(26,46,74,0.1)" stroke-width="1.5" fill="none">
         <animate attributeName="r" values="18;40;18" dur="3.5s" repeatCount="indefinite"/>
         <animate attributeName="opacity" values="0.5;0;0.5" dur="3.5s" repeatCount="indefinite"/>
       </circle>
     </svg>
 
-    <p class="eyebrow">Relational geometry · Physical ontology · A falsifiable model</p>
+    <p class="eyebrow">Falsifiable structures grow upon the architecture of ontological information</p>
     <h1><em>Relational Geometry</em><br>Model</h1>
-    <p class="hero-sub">Not a framework for thinking about reality — a model of what reality is</p>
-    <p class="hero-desc">Space, time and mass are not the stage on which physics happens. They emerge from relation: successive projections of a single primordial difference. This is a model — it commits, it predicts, it can be wrong.</p>
+    <p class="hero-sub">Uncertainty as information differentiated from the origin</p>
+    <p class="hero-desc quote-desc">“The knowledge of the ancients reached its utmost point. How far did it reach? At first, they held that there had not yet begun to be things. This was the utmost — complete, with nothing to add. Next, they held that there were things, but there had not yet begun to be boundaries among them. Next, there were boundaries, but there had not yet begun to be right and wrong. When right and wrong became manifest, the Way was diminished.”</p>
+    <p class="quote-source">— Zhuangzi, c. 4th century BCE · <em>Zhuangzi</em>, “Qiwulun” / “The Adjustment of Controversies”</p>
     <div class="hero-actions">
       <a href="https://github.com/EndlessMonkeyProyect/relational-geometry-Model" target="_blank" class="btn btn-primary">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -388,44 +611,74 @@ footer a:hover { color: var(--navy); }
 <div class="sep"></div>
 
 <!-- FOUNDATIONS -->
+
 <section id="fundamentos">
   <div class="container">
     <p class="section-label reveal"><span class="tick"></span>02 — What the model claims</p>
     <h2 class="reveal">Four claims<br>the <em>model</em> makes</h2>
     <p class="reveal" style="font-size:1.05rem; font-weight:400; color:var(--ink2); max-width:600px; margin-bottom:1rem; line-height:1.6; padding-left:1.25rem; border-left:2px solid var(--faint);">
-      "A dimension is a space for new information — information that did not fit within the previous frame and is stored in a tangential space."
+      A dimension is a space for new information — information that did not fit within the previous frame and is stored in a tangential space.
     </p>
     <p class="reveal" style="font-size:14px; color:var(--muted); max-width:580px;">
       The model proposes that physical reality does not inhabit a pre-existing space. Space itself emerges from primordial relations. Each relational projection generates a new orthogonal layer of structure — a new dimension.
     </p>
-    <div class="axiom-grid reveal">
+
+    <div class="axiom-grid minimal linked reveal">
       <div class="axiom">
-        <span class="axiom-n">AXIOM I</span>
-        <span class="axiom-sym">∅→ℝ</span>
+        <div class="axiom-head">
+          <span class="axiom-n">AXIOM I</span>
+          <span class="axiom-sym">∅→ℝ</span>
+        </div>
         <h4>Dimensional emergence</h4>
         <p>Dimensions are not the stage of physics — they are its product. They emerge as spaces for information that cannot fit within the previous projection.</p>
+        <div class="axiom-links">
+          <a class="axiom-link" href="#essay-dimension">Related essay</a>
+          <a class="axiom-link" href="https://zenodo.org/records/17639218" target="_blank">Publication</a>
+        </div>
       </div>
+
       <div class="axiom">
-        <span class="axiom-n">AXIOM II</span>
-        <span class="axiom-sym">𝒫(Ω)</span>
+        <div class="axiom-head">
+          <span class="axiom-n">AXIOM II</span>
+          <span class="axiom-sym">𝒫(Ω)</span>
+        </div>
         <h4>Generative principle</h4>
         <p>A single primordial relation, acting recursively, generates the complete hierarchy of observed structures: photons, protons, atoms, cosmos.</p>
+        <div class="axiom-links">
+          <a class="axiom-link" href="#essay-light">Related essay</a>
+          <a class="axiom-link" href="https://zenodo.org/records/17639218" target="_blank">Publication</a>
+        </div>
       </div>
+
       <div class="axiom">
-        <span class="axiom-n">AXIOM III</span>
-        <span class="axiom-sym">∇·g</span>
+        <div class="axiom-head">
+          <span class="axiom-n">AXIOM III</span>
+          <span class="axiom-sym">∇·g</span>
+        </div>
         <h4>Gravity = information reduction</h4>
         <p>Distance is information between particles. Gravity is the natural tendency of systems to reduce their informational differences down to the identity threshold.</p>
+        <div class="axiom-links">
+          <a class="axiom-link" href="#essay-gravity">Related essay</a>
+          <a class="axiom-link" href="https://zenodo.org/records/17808981" target="_blank">Publication</a>
+        </div>
       </div>
+
       <div class="axiom">
-        <span class="axiom-n">AXIOM IV</span>
-        <span class="axiom-sym">ħ</span>
+        <div class="axiom-head">
+          <span class="axiom-n">AXIOM IV</span>
+          <span class="axiom-sym">ħ</span>
+        </div>
         <h4>ħ as a relational ceiling</h4>
         <p>ħ not as a lower bound but as a relational ceiling — the value at which the system closes coherently. All physical structure emerges from the partition of this primordial reference.</p>
+        <div class="axiom-links">
+          <a class="axiom-link" href="#essay-planck">Related essay</a>
+          <a class="axiom-link" href="https://zenodo.org/records/17807496" target="_blank">Publication</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <div class="sep"></div>
 
@@ -438,10 +691,18 @@ footer a:hover { color: var(--navy); }
       Three concrete numerical predictions, verified against experimental data.
     </p>
     <div class="scale-row reveal">
-      <div class="scale-node"><span class="sc-name">Micro</span><span class="sc-sub">Proton · r_p = 4ħ/m_pc</span></div>
-      <div class="scale-node"><span class="sc-name">Meso</span><span class="sc-sub">Atom · P = 2ⁿ → Noble</span></div>
-      <div class="scale-node"><span class="sc-name">Macro</span><span class="sc-sub">V = ωR · geometric H₀</span></div>
-      <div class="scale-node"><span class="sc-name">Informational</span><span class="sc-sub">P prime → Reactivity</span></div>
+      <a class="scale-node" href="https://zenodo.org/records/17807496" target="_blank" aria-label="Open micro-scale proton radius publication">
+        <span class="sc-name">Micro</span><span class="sc-sub">Proton · r_p = 4ħ/m_pc</span>
+      </a>
+      <a class="scale-node" href="https://zenodo.org/records/17810804" target="_blank" aria-label="Open meso-scale noble gases publication">
+        <span class="sc-name">Meso</span><span class="sc-sub">Atom · P = 2ⁿ → Noble</span>
+      </a>
+      <a class="scale-node" href="https://zenodo.org/records/17808981" target="_blank" aria-label="Open macro-scale Hubble projection publication">
+        <span class="sc-name">Macro</span><span class="sc-sub">V = ωR · geometric H₀</span>
+      </a>
+      <a class="scale-node" href="https://zenodo.org/records/17810804" target="_blank" aria-label="Open informational-scale reactivity publication">
+        <span class="sc-name">Informational</span><span class="sc-sub">P prime → Reactivity</span>
+      </a>
     </div>
     <div class="formula-block reveal">
       <span class="label">Central prediction — Proton charge radius</span>
@@ -457,55 +718,46 @@ footer a:hover { color: var(--navy); }
 <section id="rosi">
   <div class="container">
     <p class="section-label reveal"><span class="tick"></span>04 — Open computational layer</p>
-    <h2 class="reveal">ROSI — the model<br>you can <em>run</em></h2>
+    <h2 class="reveal">ROSI — a tool for<br>orienting <em>convergent</em><br>information nodes</h2>
     <p class="reveal" style="font-size:14px; color:var(--ink2); max-width:620px; margin-bottom:1.25rem;">
-      <strong>ROSI</strong> — Relational Orientation System for Information — is the runnable arm of the model. It takes its arithmetic backbone, the Mersenne closure spectrum <span style="font-family:var(--code);">Mε = 2ᵉ − 1</span>, and turns it into a small, transparent logical machine: ordered thresholds, a complete logic-gate set, and circuits you can actually execute and inspect.
+      <strong>ROSI</strong> — Relational Orientation System for Information — is the runnable arm of the model. It takes its arithmetic backbone, the Mersenne closure spectrum <span style="font-family:var(--code);">Mε = 2<sup>ε</sup> − 1</span>, and turns it into a small, transparent logical machine: ordered thresholds, a complete logic-gate set, and circuits you can actually execute and inspect.
     </p>
 
     <div class="formula-block reveal">
       <span class="label">Arithmetic backbone</span>
-      Mε = 2ᵉ − 1 &nbsp;→&nbsp; M₁=1, M₂=3, M₃=7, <strong>M₄ = 15 = 3·5</strong>, M₅=31 …
+      Mε = 2<sup>ε</sup> − 1 &nbsp;→&nbsp; M₁=1, M₂=3, M₃=7, <strong>M₄ = 15 = 3·5</strong>, M₅=31 …
       <div class="result">First compositional closure at ε = 4 — the structural seat the model assigns to the proton.</div>
     </div>
 
     <p class="reveal" style="font-size:14px; color:var(--muted); max-width:620px; margin-bottom:0.6rem;">
-      It is offered in <strong style="color:var(--ink2);">open mode</strong>, in three senses:
+      It is presented as a <strong style="color:var(--ink2);">public computational companion</strong>, in three practical senses:
     </p>
     <ul class="topic-list reveal" style="max-width:620px; margin-bottom:2rem;">
-      <li><strong style="color:var(--ink2);">Open source</strong> — run it, read every line, fork it.</li>
+      <li><strong style="color:var(--ink2);">Public implementation</strong> — inspect the code, run the released examples, and test the computational layer against the documents.</li>
       <li><strong style="color:var(--ink2);">Open about its limits</strong> — ROSI organises structure; it does not yet derive the numerical parameters of the Standard Model. That boundary is stated plainly, not hidden.</li>
       <li><strong style="color:var(--ink2);">Open invitation</strong> — break it, stress it, extend it. The filter is the criterion, not the source.</li>
     </ul>
 
-    <h3 class="reveal" style="margin-top:1rem;">Tools &amp; toys <span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:0.12em;">— SPACE RESERVED · IN DEVELOPMENT</span></h3>
+    <h3 class="reveal" style="margin-top:1rem;">Active tools <span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:0.12em;">— PUBLIC SANDBOXES</span></h3>
     <p class="reveal" style="font-size:13.5px; color:var(--muted); max-width:620px; margin-bottom:0.5rem;">
-      A space held open for small interactive pieces to play with ROSI directly in the browser. Built as the model matures.
+      Small interactive pieces that can be used now in the browser. Planned tools are kept separate so the ROSI section shows what is actually available.
     </p>
     <div class="doc-grid">
+      <a href="../04_rosi/tools/rosi-lab.html" class="doc-card reveal">
+        <span class="doc-type">Interactive <span class="badge badge-z">Live</span></span>
+        <span class="doc-title">ROSI Lab: compare routes</span>
+        <span class="doc-desc">Paste a question and several candidate answers. The browser sandbox returns conserved roots, residue, and discriminating information without exposing the ROSI core.</span>
+      </a>
       <div class="doc-card wip reveal">
-        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
-        <span class="doc-title">Mersenne spectrum explorer</span>
-        <span class="doc-desc">Walk the spectrum Mε, watch each value factor, and see why ε = 4 is the first compositional closure.</span>
-      </div>
-      <div class="doc-card wip reveal">
-        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
-        <span class="doc-title">Logic-gate playground</span>
-        <span class="doc-desc">Build circuits from the complete relational gate set {OR, XOR, NOT} and run them step by step.</span>
-      </div>
-      <div class="doc-card wip reveal">
-        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
-        <span class="doc-title">Collatz testbed</span>
-        <span class="doc-desc">Watch ROSI's grammar against the Collatz map's odd-step absorption structure.</span>
-      </div>
-      <div class="doc-card wip reveal">
-        <span class="doc-type">Interactive <span class="badge badge-w">soon</span></span>
-        <span class="doc-title">Relational micro-OS</span>
-        <span class="doc-desc">Step through the four-layer relational architecture — from threshold to conditional execution.</span>
+        <span class="doc-type">Interface <span class="badge badge-w">planned</span></span>
+        <span class="doc-title">LLM conciliation interface</span>
+        <span class="doc-desc">Future workspace for comparing model answers, preserving residues, and converging without treating consensus as truth.</span>
       </div>
     </div>
 
     <div style="display:flex;gap:1rem;justify-content:flex-start;flex-wrap:wrap;margin-top:2rem;">
-      <a href="https://github.com/EndlessMonkeyProyect/relational-geometry-Model" target="_blank" class="btn btn-primary">Get the ROSI code</a>
+      <a href="https://github.com/EndlessMonkeyProyect/ROSI" target="_blank" class="btn btn-primary">Open ROSI repository</a>
+      <a href="https://zenodo.org/records/20363352" target="_blank" class="btn btn-ghost">ROSI Zenodo record</a>
       <a href="#contribuir" class="btn btn-ghost">Help build the tools</a>
     </div>
   </div>
@@ -526,11 +778,15 @@ footer a:hover { color: var(--navy); }
           <h3>Ontological and geometric foundations</h3>
           <p style="font-size:14px;color:var(--muted);">Core principles of relational emergence. This module establishes the ontological scaffolding of the model.</p>
           <ul class="topic-list">
-            <li>A dimension as a space for new information</li>
-            <li>The identity radius: minimum difference between trajectories</li>
-            <li>Space as emergence of a present-difference relative to c</li>
-            <li>ħ as the primordial relational ceiling</li>
+            <li><a href="#essay-dimension">A dimension as a space for new information</a></li>
+            <li><a href="#essay-compton">The identity radius: minimum difference between trajectories</a></li>
+            <li><a href="#essay-light">Space as emergence of a present-difference relative to c</a></li>
+            <li><a href="#essay-planck">ħ as the primordial relational ceiling</a></li>
           </ul>
+          <div class="module-links">
+            <a class="module-link" href="https://zenodo.org/records/17639218" target="_blank">Conceptual basis</a>
+            <a class="module-link" href="#documentos">Essays</a>
+          </div>
         </div>
       </div>
       <div class="module reveal">
@@ -540,11 +796,15 @@ footer a:hover { color: var(--navy); }
           <h3>The relational projection geometry</h3>
           <p style="font-size:14px;color:var(--muted);">The central geometric apparatus and its applications to gravity and cosmology.</p>
           <ul class="topic-list">
-            <li>Gravity as the elimination of relational information</li>
-            <li>Hubble's law as a geometric projection V = ωR</li>
-            <li>Black holes as frequency divergences (R→0)</li>
-            <li>Geometric estimate H₀ ≈ 2.27 × 10⁻¹⁸ s⁻¹</li>
+            <li><a href="#essay-gravity">Gravity as the elimination of relational information</a></li>
+            <li><a href="https://zenodo.org/records/17808981" target="_blank">Hubble's law as a geometric projection V = ωR</a></li>
+            <li><a href="https://zenodo.org/records/17808981" target="_blank">Black holes as frequency divergences (R→0)</a></li>
+            <li><a href="https://zenodo.org/records/17808981" target="_blank">Geometric estimate H₀ ≈ 2.27 × 10⁻¹⁸ s⁻¹</a></li>
           </ul>
+          <div class="module-links">
+            <a class="module-link" href="https://zenodo.org/records/17808981" target="_blank">Macro preprint</a>
+            <a class="module-link" href="#essay-gravity">Gravity essay</a>
+          </div>
         </div>
       </div>
       <div class="module reveal">
@@ -554,11 +814,16 @@ footer a:hover { color: var(--navy); }
           <h3>Applications to physical scales</h3>
           <p style="font-size:14px;color:var(--muted);">Concrete predictions verified experimentally across three scales of nature.</p>
           <ul class="topic-list">
-            <li>r_p = 4ħ/(m_p·c) — matches CODATA 2018 within 0.02%</li>
-            <li>Noble gases: stability when P = 2ⁿ</li>
-            <li>Reactivity: correlation when P is prime</li>
-            <li>Perfect correlation with s-p block ionisation energies</li>
+            <li><a href="https://zenodo.org/records/17807496" target="_blank">r_p = 4ħ/(m_p·c) — matches CODATA 2018 within 0.02%</a></li>
+            <li><a href="https://zenodo.org/records/17810804" target="_blank">Noble gases: stability when P = 2ⁿ</a></li>
+            <li><a href="https://zenodo.org/records/17810804" target="_blank">Reactivity: correlation when P is prime</a></li>
+            <li><a href="https://zenodo.org/records/17810804" target="_blank">Perfect correlation with s-p block ionisation energies</a></li>
           </ul>
+          <div class="module-links">
+            <a class="module-link" href="https://zenodo.org/records/17807496" target="_blank">Micro preprint</a>
+            <a class="module-link" href="https://zenodo.org/records/17810804" target="_blank">Meso preprint</a>
+            <a class="module-link" href="#preprints">All preprints</a>
+          </div>
         </div>
       </div>
     </div>
@@ -572,39 +837,88 @@ footer a:hover { color: var(--navy); }
   <div class="container">
     <p class="section-label reveal"><span class="tick"></span>06 — Conceptual essays</p>
     <h2 class="reveal">Articles and essays</h2>
-    <p class="reveal" style="font-size:14px;color:var(--muted);margin-bottom:0.5rem;">
-      Pieces that develop the central intuitions of the model — from what a dimension is to the symbolic role of Pythagoras.
+    <p class="article-intro reveal">
+      These texts work as entry points into the model. They are arranged from the most intuitive foundations to the more specific symbolic and physical readings: first the emergence of distinction, then gravity, light and Planck, and finally the symbolic bridges used to communicate the framework.
     </p>
-    <div class="doc-grid">
-      <div class="doc-card essay reveal">
-        <span class="doc-type">Conceptual essay <span class="badge badge-e">ES / EN</span></span>
-        <span class="doc-title">A Dimension as Space for New Information</span>
-        <span class="doc-desc">A dimension as a container for information that does not fit within the previous frame. Like a wave, an atomic radius gaining an electron, or the third point emerging from a line.</span>
+
+    <div class="article-group">
+      <p class="article-group-title reveal">Foundational entrance</p>
+      <div class="doc-grid">
+        <a id="essay-dimension" href="https://zenodo.org/records/17639218" target="_blank" class="doc-card essay reveal">
+          <span class="doc-type">Conceptual essay <span class="badge badge-e">ES / EN</span></span>
+          <span class="doc-title">A Dimension as Space for New Information</span>
+          <span class="doc-kicker">The simplest doorway into the model.</span>
+          <span class="doc-desc">Introduces the idea that a dimension is not an empty container, but a new room created when information no longer fits within the previous frame. It connects waves, atomic radius and geometric emergence as variations of the same intuition.</span>
+          <span class="doc-link">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+            Read related article
+          </span>
+        </a>
+
+        <a id="essay-compton" href="https://zenodo.org/records/17639218" target="_blank" class="doc-card essay reveal">
+          <span class="doc-type">Foundational essay <span class="badge badge-e">ES</span></span>
+          <span class="doc-title">Compton: The Boundary Between Being and Existing</span>
+          <span class="doc-kicker">Where existence becomes measurable.</span>
+          <span class="doc-desc">Develops the boundary between simply being and being in relation. The Compton scale is treated as a threshold where relation, spin and measurable structure begin to appear as physical reality.</span>
+          <span class="doc-link">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+            Read related article
+          </span>
+        </a>
       </div>
-      <div class="doc-card essay reveal">
-        <span class="doc-type">Conceptual essay <span class="badge badge-e">ES</span></span>
-        <span class="doc-title">Gravity as a Mechanism for Eliminating Relational Information</span>
-        <span class="doc-desc">Distance is relational information between two systems. Gravity is the natural consequence of particles attempting to reduce their differences down to the identity radius threshold.</span>
+    </div>
+
+    <div class="article-group">
+      <p class="article-group-title reveal">Physical interpretation</p>
+      <div class="doc-grid">
+        <a id="essay-gravity" href="https://zenodo.org/records/17808981" target="_blank" class="doc-card essay reveal">
+          <span class="doc-type">Conceptual essay <span class="badge badge-e">ES</span></span>
+          <span class="doc-title">Gravity as a Mechanism for Eliminating Relational Information</span>
+          <span class="doc-kicker">Gravity read as convergence.</span>
+          <span class="doc-desc">Presents distance as relational information between systems. Gravity is interpreted as the tendency of particles and structures to reduce their differences toward an identity threshold.</span>
+          <span class="doc-link">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+            Read related article
+          </span>
+        </a>
+
+        <a id="essay-light" href="https://zenodo.org/records/17639218" target="_blank" class="doc-card essay reveal">
+          <span class="doc-type">Bilingual essay <span class="badge badge-e">ES / EN</span></span>
+          <span class="doc-title">Primero Fue Light — First Came Light</span>
+          <span class="doc-kicker">Light as the first visible difference.</span>
+          <span class="doc-desc">A thought experiment on an initial state without distinctions. The photon appears as a latent difference in the present: the first marker separating two nearly identical trajectories.</span>
+          <span class="doc-link">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+            Read related article
+          </span>
+        </a>
+
+        <a id="essay-planck" href="https://zenodo.org/records/17807496" target="_blank" class="doc-card essay reveal">
+          <span class="doc-type">Theoretical note <span class="badge badge-e">ES</span></span>
+          <span class="doc-title">Planck as a Primordial Relational Ceiling</span>
+          <span class="doc-kicker">The limit where relation closes.</span>
+          <span class="doc-desc">Reads ħ not merely as a lower bound, but as a ceiling of relational closure: the value at which the system becomes stable enough to generate measurable physical diversity.</span>
+          <span class="doc-link">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+            Read related article
+          </span>
+        </a>
       </div>
-      <div class="doc-card essay reveal">
-        <span class="doc-type">Bilingual essay <span class="badge badge-e">ES / EN</span></span>
-        <span class="doc-title">Primero Fue Light — First Came Light</span>
-        <span class="doc-desc">A thought experiment on the initial state without differences. The photon as a latent difference in the present. Light as the first marker of distinction between two nearly identical trajectories.</span>
-      </div>
-      <div class="doc-card essay reveal">
-        <span class="doc-type">Theoretical note <span class="badge badge-e">ES</span></span>
-        <span class="doc-title">Planck as a Primordial Relational Ceiling</span>
-        <span class="doc-desc">ħ not as a lower bound but as a relational ceiling — the value at which the system closes coherently. All physical diversity arises from new ways of relating to the same reference.</span>
-      </div>
-      <div class="doc-card essay reveal">
-        <span class="doc-type">Philosophical essay <span class="badge badge-e">ES</span></span>
-        <span class="doc-title">Pythagoras' "Memory" as Symbol</span>
-        <span class="doc-desc">Why the same theorem recurs across distinct cultures. An invariant waiting in the structure of space. Includes a proton radius calculation with ~2% deviation as a motivating case.</span>
-      </div>
-      <div class="doc-card essay reveal">
-        <span class="doc-type">Foundational essay <span class="badge badge-e">ES</span></span>
-        <span class="doc-title">Compton: The Boundary Between Being and Existing</span>
-        <span class="doc-desc">A complete geometric model of existence. The universe as exhaustion of relational information. Spin as the product of magnitudes that are not exact multiples of ħ. A falsifiable, open model.</span>
+    </div>
+
+    <div class="article-group">
+      <p class="article-group-title reveal">Symbolic bridges</p>
+      <div class="doc-grid">
+        <a id="essay-pythagoras" href="https://zenodo.org/records/17807496" target="_blank" class="doc-card essay reveal">
+          <span class="doc-type">Philosophical essay <span class="badge badge-e">ES</span></span>
+          <span class="doc-title">Pythagoras' "Memory" as Symbol</span>
+          <span class="doc-kicker">Mathematics as remembered structure.</span>
+          <span class="doc-desc">Uses the recurrence of the same theorem across cultures as a symbolic clue: some structures seem to wait inside geometry itself. The essay connects that intuition with the proton-radius motivation.</span>
+          <span class="doc-link">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2h8v8M10 2L2 10"/></svg>
+            Read related article
+          </span>
+        </a>
       </div>
     </div>
   </div>
@@ -639,6 +953,18 @@ footer a:hover { color: var(--navy); }
           zenodo.org/records/17810804
         </span>
       </a>
+      <a href="https://zenodo.org/records/20573845" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Preprint - CHEMISTRY / CLOSURE <span class="badge badge-z">Zenodo</span></span>
+        <span class="doc-title">Closure-Node Registration</span>
+        <span class="doc-desc">Redox richness as the signature of where unresolved relational difference is registered relative to a closure node; d- and f-block regimes presented with explicit asymmetry of evidence.</span>
+        <span class="doc-link">zenodo.org/records/20573845</span>
+      </a>
+      <a href="../03_predictions/closure_node_post_audit/closure_node_post_audit_article_v1.pdf" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Post-audit - CHEMISTRY / CLOSURE <span class="badge badge-z">Repo PDF</span></span>
+        <span class="doc-title">Closure-Node Registration after Audit</span>
+        <span class="doc-desc">Current conclusion ledger and audit data: the chemistry line is framed as a generative mechanism framework for relational descriptors and falsifiable tests, not a validated redox predictor.</span>
+        <span class="doc-link">../03_predictions/closure_node_post_audit/closure_node_post_audit_article_v1.pdf</span>
+      </a>
       <a href="https://zenodo.org/records/17808981" target="_blank" class="doc-card zenodo reveal">
         <span class="doc-type">Preprint · MACRO <span class="badge badge-z">Zenodo</span></span>
         <span class="doc-title">Hubble's Law as a Geometric Projection V = ωR</span>
@@ -657,7 +983,7 @@ footer a:hover { color: var(--navy); }
           zenodo.org/records/17639218
         </span>
       </a>
-          <a href="https://zenodo.org/records/18701688" target="_blank" class="doc-card zenodo reveal">
+<a href="https://zenodo.org/records/18701688" target="_blank" class="doc-card zenodo reveal">
         <span class="doc-type">Preprint Â· FOUNDATIONS <span class="badge badge-z">Zenodo</span></span>
         <span class="doc-title">Minimal Generative Algebraic Model of Dimensional Emergence</span>
         <span class="doc-desc">Algebraic development of relational geometry and dimensional emergence from generative projection principles.</span>
@@ -674,6 +1000,12 @@ footer a:hover { color: var(--navy); }
         <span class="doc-title">Relational Geometry and the Emergence of Gravity</span>
         <span class="doc-desc">From harmonic closure to stellar structure, with the TOV correction and computational artifacts preserved in the repository.</span>
         <span class="doc-link">zenodo.org/records/19141411</span>
+      </a>
+      <a href="../03_predictions/continuum_dynamics/navier_stokes__redistribution_v2.pdf" target="_blank" class="doc-card zenodo reveal">
+        <span class="doc-type">Preprint - DYNAMICS / CONTINUUM <span class="badge badge-z">Repo PDF</span></span>
+        <span class="doc-title">Incompressible Flow as Redistribution of Accumulated Difference</span>
+        <span class="doc-desc">Version 2 (8 June 2026): exact Navier-Stokes containment, conservative memory, and a finite ringing band. Citation record: zenodo.org/records/20578888.</span>
+        <span class="doc-link">../03_predictions/continuum_dynamics/navier_stokes__redistribution_v2.pdf</span>
       </a>
       <a href="https://zenodo.org/records/15808667" target="_blank" class="doc-card zenodo reveal">
         <span class="doc-type">Protocol Â· BEC <span class="badge badge-z">Zenodo</span></span>
@@ -693,12 +1025,13 @@ footer a:hover { color: var(--navy); }
         <span class="doc-desc">Formal specification of the relational engine and Lambda Difference Mechanism; latest Zenodo metadata record.</span>
         <span class="doc-link">zenodo.org/records/20363352</span>
       </a>
+
     </div>
 
     <div class="status-block reveal">
       <h4>Programme status · June 2026</h4>
       <ul class="status-list">
-        <li>10 Zenodo records curated as the public research map</li>
+        <li>12 Zenodo records curated as the public research map</li>
         <li>6 conceptual essays written</li>
         <li>Predictions verified at 3 physical scales</li>
         <li>Internal geometric coherence documented</li>
